@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Up • Cadastro de Viagens</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="index.js" defer></script>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">✈️</span>
+      <div>
+        <h1>Travel Up</h1>
+        <p>Cadastro de viagens (API)</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="btn">Carregar viagens</button>
+      <button id="btn_load_more" title="Próxima página">+</button>
+      <button id="btn_back" title="Página anterior">-</button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>Nova Viagem</h2>
+
+      <div class="form">
+        <input type="text" id="campoDestino" placeholder="Destino (ex: Gramado - RS)" />
+
+        <input type="text" id="campoCaracteristica" placeholder="Característica (ex: praia, negócios, romântica)" />
+
+        <input type="text" id="campoComprador" placeholder="Comprador (quem cadastrou/comprou)" />
+
+        <label class="label">Data de ida</label>
+        <input type="date" id="campoDataIda" />
+
+        <label class="label">Data de volta</label>
+        <input type="date" id="campoDataVolta" />
+
+        <button id="btnSalvar">Salvar</button>
+      </div>
+    </section>
+
+    <!-- MODAL DE EDIÇÃO -->
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <h2>Editar viagem</h2>
+
+        <input type="text" id="campoDestino_edit" placeholder="Destino" />
+        <input type="text" id="campoCaracteristica_edit" placeholder="Característica" />
+        <input type="text" id="campoComprador_edit" placeholder="Comprador" />
+
+        <label class="label">Data de ida</label>
+        <input type="date" id="campoDataIda_edit" />
+
+        <label class="label">Data de volta</label>
+        <input type="date" id="campoDataVolta_edit" />
+
+        <div class="modal-actions">
+          <button id="btnSalvar_alteracao">Alterar</button>
+          <button id="btnFecharModal" type="button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="card">
+      <h2>Lista de Viagens</h2>
+      <div id="listagem" class="container"></div>
+    </section>
+
+  </main>
+
+</body>
+
+</html>
