@@ -18,8 +18,12 @@ router.get("/", async (req, res) => {
         // data_ini e data_fim devem ser "YYYY-MM-DD"
         const hasDateFilter = data_ini || data_fim;
 
+        const info = await pool.query("SELECT current_database() db, current_schema() sch");
+        console.log("DB/SCH da API:", info.rows[0]);
+
+
         const query = `
-      SELECT * FROM viagens
+      SELECT * FROM public.viagens
       WHERE destino ILIKE $1
         AND comprador ILIKE $2
         ${hasDateFilter ? "AND data_ida BETWEEN $3 AND $4" : ""}
@@ -53,7 +57,7 @@ router.get("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const result = await pool.query(
-            "SELECT * FROM viagens WHERE id = $1",
+            "SELECT * FROM public.viagens WHERE id = $1",
             [id]
         );
         if (result.rows.length === 0) return res.status(404).json({ error: "Viagem não encontrada" });
@@ -80,7 +84,7 @@ router.post("/", async (req, res) => {
         }
 
         const result = await pool.query(
-            `INSERT INTO viagens (destino, caracteristica, comprador, data_ida, data_volta)
+            `INSERT INTO public.viagens (destino, caracteristica, comprador, data_ida, data_volta)
        VALUES ($1, $2, $3, $4, $5)
        RETURNING *`,
             [destino, caracteristica, comprador, data_ida, data_volta]
@@ -109,7 +113,7 @@ router.put("/:id", async (req, res) => {
         }
 
         const result = await pool.query(
-            `UPDATE viagens
+            `UPDATE public.viagens
        SET destino=$1, caracteristica=$2, comprador=$3, data_ida=$4, data_volta=$5
        WHERE id=$6
        RETURNING *`,
@@ -127,7 +131,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const result = await pool.query("DELETE FROM viagens WHERE id = $1 RETURNING *", [id]);
+        const result = await pool.query("DELETE FROM public.viagens WHERE id = $1 RETURNING *", [id]);
 
         if (result.rows.length === 0) return res.status(404).json({ error: "Viagem não encontrada" });
         res.status(204).end();

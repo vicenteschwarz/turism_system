@@ -1,0 +1,234 @@
+:root{
+  --green:#539466;
+  --white:#ffffff;
+  --bg:#f3f6f4;
+  --text:#1b1f1c;
+  --muted:#6b7b73;
+  --border:#d5ded9;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* Topo */
+.topbar{
+  background:var(--green);
+  color:var(--white);
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.big_text h1{
+  font-size:100px;
+  margin:0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  font-size:26px;
+  line-height:1;
+  background:var(--white);
+  color:var(--green);
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.brand_up{
+  width:200px;
+  height:200px;
+  border-radius:10px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:3vw;
+}
+
+.brand p{
+  margin:2px 0 0;
+  font-size:1.5vw;
+  color:#eaf5ef;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.actions button{
+  border:1px solid rgba(255,255,255,0.7);
+  background:var(--white);
+  color:var(--green);
+  padding:10px 12px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.actions #btn_load_more,
+.actions #btn_back{
+  width:44px;
+  padding:10px 0;
+}
+
+/* Layout */
+main{
+  max-width:980px;
+  margin:18px auto;
+  padding:0 16px 30px;
+}
+
+/* Cards */
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  margin:14px 0;
+}
+
+.card h2{
+  margin:0 0 12px;
+  font-size:18px;
+  color:var(--green);
+}
+
+/* Form */
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.label{
+  grid-column:1 / -1;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+input{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--white);
+  color:var(--text);
+  outline:none;
+}
+
+#btnSalvar{
+  grid-column:1 / -1;
+  background:var(--green);
+  color:var(--white);
+  border:1px solid var(--green);
+  padding:12px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* Listagem */
+.container{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(220px, 1fr));
+  gap:12px;
+}
+
+/* Caso você crie cards de viagem via JS */
+.viagem{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  background:var(--white);
+}
+
+.viagem h3{
+  margin:0 0 6px;
+  font-size:16px;
+  color:var(--green);
+}
+
+.viagem p{
+  margin:4px 0;
+  font-size:13px;
+  color:var(--text);
+}
+
+/* Modal */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  padding:16px;
+}
+
+.modal-content{
+  max-width:520px;
+  margin:60px auto 0;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+}
+
+.modal-content h2{
+  margin:0 0 12px;
+  font-size:18px;
+  color:var(--green);
+}
+
+.modal-content input{
+  margin-bottom:10px;
+}
+
+.modal-actions{
+  display:flex;
+  gap:10px;
+  margin-top:8px;
+}
+
+#btnSalvar_alteracao{
+  background:var(--green);
+  color:var(--white);
+  border:1px solid var(--green);
+  padding:10px 12px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  flex:1;
+}
+
+#btnFecharModal{
+  background:var(--white);
+  color:var(--green);
+  border:1px solid var(--border);
+  padding:10px 12px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  flex:1;
+}
+
