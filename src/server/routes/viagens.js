@@ -70,6 +70,8 @@ router.get("/:id", async (req, res) => {
 // INSERIR
 router.post("/", async (req, res) => {
     try {
+        //console.log("POST /viagens body:", req.body);
+
         const { destino, caracteristica, comprador, data_ida, data_volta } = req.body;
 
         if (!destino || !caracteristica || !comprador || !data_ida || !data_volta) {
