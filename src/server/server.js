@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const cors = require('cors');
 
-const viagensRouter = require("./server/routes/viagens");
+const viagensRouter = require("./routes/viagens");
 const autenticarAPIKey = require("./authorization");
 
 const app = express();
