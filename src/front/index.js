@@ -1,6 +1,5 @@
 const API = "http://127.0.0.1:3000/viagens";
-//const API = "https://municipios-senac-main-1-uali.onrender.com/viagens";
-
+const API_BASE = "http://127.0.0.1:3000";
 const CLIENT_API_KEY = "SUA_CHAVE_SECRETA_MUITO_FORTE_123456";
 
 const listagem = document.getElementById("listagem");
@@ -11,12 +10,180 @@ const btnLoadMore = document.getElementById("btn_load_more");
 const btnBack = document.getElementById("btn_back");
 const btnFecharModal = document.getElementById("btnFecharModal");
 
+//botões ida e volta
+const recoList = document.getElementById("recoList");
+const recoPrev = document.getElementById("recoPrev");
+const recoNext = document.getElementById("recoNext");
+
+
+//modal de recomendações
+const modalReco = document.getElementById("modalReco");
+const recoDestinoTxt = document.getElementById("recoDestinoTxt");
+const recoPrecoTxt = document.getElementById("recoPrecoTxt");
+const recoIdaTxt = document.getElementById("recoIdaTxt");
+const recoVoltaTxt = document.getElementById("recoVoltaTxt");
+const recoComprador = document.getElementById("recoComprador");
+const btnComprarReco = document.getElementById("btnComprarReco");
+const btnFecharReco = document.getElementById("btnFecharReco");
+
 let limit = 3;
 let offset = 0;
 let lastScrollTop = 0;
 
 const modal = document.getElementById("modal");
 let idViagemEdit = null; // Guardar o ID da viagem para editar
+
+
+//
+
+
+let recoSelecionada = null;
+
+function fmtBRL(v){
+  return Number(v).toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
+}
+
+function onlyDatePart(s) {
+  return (s ?? "").toString().slice(0, 10); // "YYYY-MM-DD"
+}
+
+function fmtDataBR(value) {
+  const d = onlyDatePart(value);
+  const [y, m, day] = d.split("-");
+  return `${day}/${m}/${y}`;
+}
+
+function diasEntre(dataIda, dataVolta) {
+  const a = onlyDatePart(dataIda);
+  const b = onlyDatePart(dataVolta);
+
+  const [y1, m1, d1] = a.split("-").map(Number);
+  const [y2, m2, d2] = b.split("-").map(Number);
+
+  const utc1 = Date.UTC(y1, m1 - 1, d1);
+  const utc2 = Date.UTC(y2, m2 - 1, d2);
+
+  const diff = Math.round((utc2 - utc1) / 86400000);
+  return Math.max(1, diff);
+}
+
+
+function abrirModalReco(reco){
+  recoSelecionada = reco;
+  recoDestinoTxt.textContent = reco.destino;
+  recoPrecoTxt.textContent = fmtBRL(reco.preco_passagem);
+  recoIdaTxt.textContent = fmtDataBR(reco.data_ida);
+  recoVoltaTxt.textContent = fmtDataBR(reco.data_volta);
+  recoComprador.value = "";
+  modalReco.style.display = "block";
+}
+
+function fecharModalReco(){
+  modalReco.style.display = "none";
+  recoSelecionada = null;
+}
+
+btnFecharReco?.addEventListener("click", fecharModalReco);
+modalReco?.addEventListener("click", (e) => {
+  if (e.target === modalReco) fecharModalReco();
+});
+
+btnComprarReco?.addEventListener("click", async () => {
+  if (!recoSelecionada) return;
+
+  const comprador = (recoComprador.value || "").trim();
+  if (!comprador) {
+    alert("Informe o comprador.");
+    return;
+  }
+
+  // Você pode trocar "recomendação" por algo que você quiser
+  const body = {
+    destino: recoSelecionada.destino,
+    caracteristica: "recomendação",
+    comprador,
+    data_ida: recoSelecionada.data_ida,
+    data_volta: recoSelecionada.data_volta
+  };
+
+  const resp = await fetch(`${API_BASE}/viagens`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "minha-chave": CLIENT_API_KEY
+    },
+    body: JSON.stringify(body)
+  });
+
+  if (!resp.ok) {
+    const txt = await resp.text();
+    console.error("Erro POST /viagens:", txt);
+    alert("Erro ao adicionar viagem.");
+    return;
+  }
+
+  fecharModalReco();
+  alert("Viagem adicionada!");
+
+  // Se você já tem função que recarrega viagens, chama aqui:
+  // carregarMunicipios... (no seu caso seria carregarViagens)
+});
+
+async function carregarRecomendacoes(){
+  const resp = await fetch(`${API_BASE}/recomendacoes?limit=50&offset=0&ordem=desc`, {
+    headers: { "minha-chave": CLIENT_API_KEY }
+  });
+
+  if (!resp.ok) {
+    console.error("Erro ao carregar recomendações:", await resp.text());
+    return;
+  }
+
+  const recos = await resp.json();
+  recoList.innerHTML = "";
+
+  recos.forEach((r) => {
+    const dias = diasEntre(r.data_ida, r.data_volta);
+    const imgSrc = `../assets/recomendacoes/${r.imagem_ref}`; // arquivo local do projeto
+
+    const card = document.createElement("div");
+    card.className = "reco-card";
+    card.innerHTML = `
+      <img class="reco-img" src="${imgSrc}" alt="${r.destino}">
+      <div class="reco-body">
+        <p class="reco-title">${r.destino} | ${dias} dias</p>
+        <p class="reco-sub">Saindo de São Paulo</p>
+
+        <div class="reco-line"><span>Ida:</span><div>${fmtDataBR(r.data_ida)}</div></div>
+        <div class="reco-line"><span>Volta:</span><div>${fmtDataBR(r.data_volta)}</div></div>
+
+        <div class="reco-price-label">A partir de</div>
+        <div class="reco-price">${fmtBRL(r.preco_passagem)}</div>
+      </div>
+      <div class="reco-foot">Em até 12x sem juros</div>
+    `;
+
+    card.addEventListener("click", () => abrirModalReco(r));
+    recoList.appendChild(card);
+  });
+}
+
+function scrollReco(dir){
+  const amount = 300; // largura aproximada do card
+  recoList.scrollLeft += dir * amount;
+}
+
+recoPrev?.addEventListener("click", () => scrollReco(-1));
+recoNext?.addEventListener("click", () => scrollReco(1));
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarRecomendacoes();
+});
+
+
+//
+
+
 
 // --------------------
 // Eventos

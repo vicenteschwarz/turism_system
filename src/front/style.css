@@ -1,234 +1,434 @@
-:root{
-  --green:#539466;
-  --white:#ffffff;
-  --bg:#f3f6f4;
-  --text:#1b1f1c;
-  --muted:#6b7b73;
-  --border:#d5ded9;
+:root {
+  --green: #539466;
+  --white: #ffffff;
+  --bg: #f3f6f4;
+  --text: #1b1f1c;
+  --muted: #6b7b73;
+  --border: #d5ded9;
 }
 
-*{
-  box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:var(--bg);
-  color:var(--text);
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* Topo */
-.topbar{
-  background:var(--green);
-  color:var(--white);
-  padding:16px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
+.topbar {
+  background: var(--green);
+  color: var(--white);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.big_text h1{
-  font-size:100px;
-  margin:0;
+.big_text h1 {
+  font-size: 100px;
+  margin: 0;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.logo{
-  font-size:26px;
-  line-height:1;
-  background:var(--white);
-  color:var(--green);
-  width:42px;
-  height:42px;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.logo {
+  font-size: 26px;
+  line-height: 1;
+  background: var(--white);
+  color: var(--green);
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.brand_up{
-  width:200px;
-  height:200px;
-  border-radius:10px;
+.brand_up {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
 }
 
-.brand h1{
-  margin:0;
-  font-size:3vw;
+.brand h1 {
+  margin: 0;
+  font-size: 3vw;
 }
 
-.brand p{
-  margin:2px 0 0;
-  font-size:1.5vw;
-  color:#eaf5ef;
+.brand p {
+  margin: 2px 0 0;
+  font-size: 1.5vw;
+  color: #eaf5ef;
 }
 
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.actions button{
-  border:1px solid rgba(255,255,255,0.7);
-  background:var(--white);
-  color:var(--green);
-  padding:10px 12px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
+.actions button {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: var(--white);
+  color: var(--green);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .actions #btn_load_more,
-.actions #btn_back{
-  width:44px;
-  padding:10px 0;
+.actions #btn_back {
+  width: 44px;
+  padding: 10px 0;
 }
 
 /* Layout */
-main{
-  max-width:980px;
-  margin:18px auto;
-  padding:0 16px 30px;
+main {
+  max-width: 980px;
+  margin: 18px auto;
+  padding: 0 16px 30px;
 }
 
 /* Cards */
-.card{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:16px;
-  margin:14px 0;
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 14px 0;
 }
 
-.card h2{
-  margin:0 0 12px;
-  font-size:18px;
-  color:var(--green);
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--green);
 }
 
 /* Form */
-.form{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.label{
-  grid-column:1 / -1;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:6px;
+.label {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
 }
 
-input{
-  width:100%;
-  padding:10px 12px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:var(--white);
-  color:var(--text);
-  outline:none;
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--text);
+  outline: none;
 }
 
-#btnSalvar{
-  grid-column:1 / -1;
-  background:var(--green);
-  color:var(--white);
-  border:1px solid var(--green);
-  padding:12px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
+#btnSalvar {
+  grid-column: 1 / -1;
+  background: var(--green);
+  color: var(--white);
+  border: 1px solid var(--green);
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 /* Listagem */
-.container{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(220px, 1fr));
-  gap:12px;
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 12px;
 }
 
 /* Caso você crie cards de viagem via JS */
-.viagem{
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:12px;
-  background:var(--white);
+.viagem {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--white);
 }
 
-.viagem h3{
-  margin:0 0 6px;
-  font-size:16px;
-  color:var(--green);
+.viagem h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: var(--green);
 }
 
-.viagem p{
-  margin:4px 0;
-  font-size:13px;
-  color:var(--text);
+.viagem p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: var(--text);
 }
 
 /* Modal */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.35);
-  padding:16px;
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 16px;
 }
 
-.modal-content{
-  max-width:520px;
-  margin:60px auto 0;
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:16px;
+.modal-content {
+  max-width: 520px;
+  margin: 60px auto 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
 }
 
-.modal-content h2{
-  margin:0 0 12px;
-  font-size:18px;
-  color:var(--green);
+.modal-content h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--green);
 }
 
-.modal-content input{
-  margin-bottom:10px;
+.modal-content input {
+  margin-bottom: 10px;
 }
 
-.modal-actions{
-  display:flex;
-  gap:10px;
-  margin-top:8px;
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
 }
 
-#btnSalvar_alteracao{
-  background:var(--green);
-  color:var(--white);
-  border:1px solid var(--green);
-  padding:10px 12px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
-  flex:1;
+#btnSalvar_alteracao {
+  background: var(--green);
+  color: var(--white);
+  border: 1px solid var(--green);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  flex: 1;
 }
 
-#btnFecharModal{
-  background:var(--white);
-  color:var(--green);
-  border:1px solid var(--border);
-  padding:10px 12px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
-  flex:1;
+#btnFecharModal {
+  background: var(--white);
+  color: var(--green);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  flex: 1;
 }
 
+:root {
+  --green: #539466;
+  --white: #fff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --bg: #f5f7f6;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Recomendações */
+.reco-section {
+  max-width: 1100px;
+  margin: 0   auto 30px;
+  padding: 0 16px;
+}
+
+.reco-head h2 {
+  margin-top: 2vw;
+  margin-bottom: -1vw;
+  font-size: 2vw;
+}
+
+.reco-head p {
+  margin-bottom: 2vw;
+  color: var(--muted);
+  font-size: 1vw;
+}
+
+.reco-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reco-nav {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.reco-slider {
+  flex: 1;
+  display: flex;
+  gap: 14px;
+  overflow: auto;
+  padding: 6px 4px 12px;
+  scroll-snap-type: x mandatory;
+}
+
+.reco-card {
+  min-width: 280px;
+  max-width: 280px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  scroll-snap-align: start;
+}
+
+.reco-img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+}
+
+.reco-body {
+  padding: 12px 14px 10px;
+}
+
+.reco-title {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.reco-sub {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.reco-line {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.reco-line span {
+  color: var(--muted);
+  min-width: 44px;
+}
+
+.reco-price-label {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.reco-price {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 2px 0 0;
+}
+
+.reco-foot {
+  border-top: 1px solid var(--border);
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Modal (reaproveita sua classe .modal se já tiver) */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 16px;
+}
+
+.modal-content {
+  max-width: 520px;
+  margin: 70px auto 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.modal-grid {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-top: 6px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+#btnComprarReco {
+  flex: 1;
+  background: var(--green);
+  color: var(--white);
+  border: 1px solid var(--green);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#btnFecharReco {
+  flex: 1;
+  background: var(--white);
+  color: var(--green);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}

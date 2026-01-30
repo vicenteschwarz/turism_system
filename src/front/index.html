@@ -29,6 +29,58 @@
 
   <main>
 
+    <section class="reco-section">
+  <div class="reco-head">
+    <h2>Recomendações</h2>
+    <p>Escolha um destino e adicione como viagem!</p>
+  </div>
+
+  <div class="reco-wrap">
+    <button id="recoPrev" class="reco-nav" type="button">‹</button>
+
+    <div id="recoList" class="reco-slider"></div>
+
+    <button id="recoNext" class="reco-nav" type="button">›</button>
+  </div>
+</section>
+
+<!-- MODAL: COMPRAR A PARTIR DA RECOMENDAÇÃO -->
+<div class="modal" id="modalReco">
+  <div class="modal-content">
+    <h2>Adicionar viagem</h2>
+
+    <div class="modal-grid">
+      <div class="modal-row">
+        <span class="muted">Destino</span>
+        <strong id="recoDestinoTxt">-</strong>
+      </div>
+
+      <div class="modal-row">
+        <span class="muted">Preço</span>
+        <strong id="recoPrecoTxt">-</strong>
+      </div>
+
+      <div class="modal-row">
+        <span class="muted">Ida</span>
+        <strong id="recoIdaTxt">-</strong>
+      </div>
+
+      <div class="modal-row">
+        <span class="muted">Volta</span>
+        <strong id="recoVoltaTxt">-</strong>
+      </div>
+    </div>
+
+    <input type="text" id="recoComprador" placeholder="Comprador (quem comprou)" />
+
+    <div class="modal-actions">
+      <button id="btnComprarReco">Adicionar</button>
+      <button id="btnFecharReco" type="button">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+
     <section class="card">
       <h2>Nova Viagem</h2>
 
