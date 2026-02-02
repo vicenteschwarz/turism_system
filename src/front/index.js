@@ -1,5 +1,5 @@
 const API = "http://127.0.0.1:3000/viagens";
-const API_BASE = "http://127.0.0.1:3000";
+const API_BASE = "http://127.0.0.1:3000"; //substituir pela url da api
 const CLIENT_API_KEY = "SUA_CHAVE_SECRETA_MUITO_FORTE_123456";
 
 const listagem = document.getElementById("listagem");
