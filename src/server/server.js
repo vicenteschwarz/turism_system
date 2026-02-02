@@ -7,10 +7,7 @@ const recomendacoesRouter = require("./routes/recomendacoes");
 const autenticarAPIKey = require("./authorization");
 
 const app = express();
-
-// Em produção, restrinja o CORS pro domínio do seu site estático
-const allowedOrigin = process.env.FRONTEND_URL || "*";
-app.use(cors({ origin: allowedOrigin }));
+app.use(cors())
 
 app.use(express.json());
 
