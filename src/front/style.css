@@ -138,6 +138,16 @@ input {
   outline: none;
 }
 
+.btn-delete{
+  background: var(--white);
+  color: var(--green);
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 #btnSalvar {
   grid-column: 1 / -1;
   background: var(--green);

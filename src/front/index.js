@@ -283,7 +283,7 @@ function criarCard(v) {
 
     <div class="card-actions">
       <button class="btn-delete" onclick="deletar(${v.id})">Deletar</button>
-      <button onclick="modalEdicao(${v.id})">Editar</button>
+      <button class="btn-delete" onclick="modalEdicao(${v.id})">Editar</button>
     </div>
   `;
 
