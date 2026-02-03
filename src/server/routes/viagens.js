@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
         offset = parseInt(offset) || 0;
         limit = parseInt(limit) || 100;
 
-        // filtro opcional por intervalo de data_ida (se vier no query)
-        // data_ini e data_fim devem ser "YYYY-MM-DD"
+        // filtro data_ida ()
+        // data_ini e data_fim temqser "YYYY-MM-DD"
         const hasDateFilter = data_ini || data_fim;
 
         const info = await pool.query("SELECT current_database() db, current_schema() sch");
@@ -80,7 +80,7 @@ router.post("/", async (req, res) => {
             });
         }
 
-        // validação simples de datas
+        // validação data
         if (new Date(data_volta) < new Date(data_ida)) {
             return res.status(400).json({ error: "data_volta não pode ser menor que data_ida" });
         }

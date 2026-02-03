@@ -1,5 +1,5 @@
 const API = "http://127.0.0.1:3000/viagens";
-const API_BASE = "http://127.0.0.1:3000"; //substituir pela url da api
+const API_BASE = "http://127.0.0.1:3000"; //substituir pela url da api dps talvez n sei
 const CLIENT_API_KEY = "SUA_CHAVE_SECRETA_MUITO_FORTE_123456";
 
 const listagem = document.getElementById("listagem");
@@ -34,8 +34,7 @@ const modal = document.getElementById("modal");
 let idViagemEdit = null; // Guardar o ID da viagem para editar
 
 
-//
-
+// funções copiadas pra arrumar o layout das data q tava bugado no html/css (as 3 d baixo)
 
 let recoSelecionada = null;
 
@@ -52,6 +51,9 @@ function fmtDataBR(value) {
   const [y, m, day] = d.split("-");
   return `${day}/${m}/${y}`;
 }
+
+
+// pra calcular os dias das viagens
 
 function diasEntre(dataIda, dataVolta) {
   const a = onlyDatePart(dataIda);
