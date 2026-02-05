@@ -1,5 +1,10 @@
-const API = "http://127.0.0.1:3000/viagens";
-const API_BASE = "http://127.0.0.1:3000"; //substituir pela url da api dps talvez n sei
+const API_BASE =
+  location.hostname.includes("onrender.com")
+    ? "https://SUA-API.onrender.com"
+    : "http://127.0.0.1:3000";
+
+const API = `${API_BASE}/viagens`;
+
 const CLIENT_API_KEY = "SUA_CHAVE_SECRETA_MUITO_FORTE_123456";
 
 const listagem = document.getElementById("listagem");
@@ -12,7 +17,7 @@ const btnFecharModal = document.getElementById("btnFecharModal");
 
 //botões ida e volta
 const recoList = document.getElementById("recoList");
-const recoPrev = document.getElementById("recoPrev");
+const recoPrev = document.getElementById("recoPrev"); 
 const recoNext = document.getElementById("recoNext");
 
 
