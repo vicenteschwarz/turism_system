@@ -109,13 +109,10 @@ body {
 }
 
 
-
-.actip
-
 /* Layout */
 main {
-  max-width: 980px;
-  margin: 18px auto;
+  max-width: 1100px;
+  margin: 18px auto 30px;
   padding: 0 16px 30px;
 }
 
@@ -262,27 +259,12 @@ input {
   flex: 1;
 }
 
-:root {
-  --green: #539466;
-  --white: #fff;
-  --text: #111827;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --bg: #f5f7f6;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
 
 /* Recomendações */
 .reco-section {
   max-width: 1100px;
-  margin: 0   auto 30px;
-  padding: 0 16px;
+  margin: 0 0 30px;
+  padding: 0;
 }
 
 .reco-head h2 {
@@ -512,6 +494,7 @@ body {
   display:flex;
   align-items:center;
   gap:10px;
+  margin-left:auto;
 }
 
 #userInfo{
@@ -527,10 +510,5 @@ body {
   padding:8px 10px;
   border-radius:10px;
   cursor:pointer;
-}
-
-.userbar{
-  margin-left: 55vw;
-  font-size: 22px;
 }
 

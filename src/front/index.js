@@ -293,8 +293,8 @@ async function carregarTokenUsuario() {
 btnCarregar.addEventListener("click", () => carregarViagens("inicio"));
 btnSalvar.addEventListener("click", inserirViagem);
 btnSalvarAlteracao.addEventListener("click", alterarViagem);
-btnLoadMore.addEventListener("click", () => carregarViagens("mais"));
-btnBack.addEventListener("click", () => carregarViagens("menos"));
+btnLoadMore.addEventListener("click", () => carregarViagens("menos"));
+btnBack.addEventListener("click", () => carregarViagens("mais"));
 
 if (btnFecharModal) {
   btnFecharModal.addEventListener("click", () => {
