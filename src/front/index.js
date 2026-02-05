@@ -33,13 +33,31 @@ let lastScrollTop = 0;
 const modal = document.getElementById("modal");
 let idViagemEdit = null; // Guardar o ID da viagem para editar
 
+let USER_TOKEN = localStorage.getItem("USER_TOKEN") || "";
+let CURRENT_ROLE = "user";
+
+const loginOverlay = document.getElementById("loginOverlay");
+const tokenInput = document.getElementById("tokenInput");
+const btnLogin = document.getElementById("btnLogin");
+const loginMsg = document.getElementById("loginMsg");
+const userInfo = document.getElementById("userInfo");
+const btnLogout = document.getElementById("btnLogout");
+
+// Se quiser forçar pedir token sempre, descomente:
+// localStorage.removeItem("USER_TOKEN");
+
+window.trocarToken = function () {
+  localStorage.removeItem("USER_TOKEN");
+  location.reload();
+};
+
 
 // funções copiadas pra arrumar o layout das data q tava bugado no html/css (as 3 d baixo)
 
 let recoSelecionada = null;
 
-function fmtBRL(v){
-  return Number(v).toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
+function fmtBRL(v) {
+  return Number(v).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
 function onlyDatePart(s) {
@@ -70,7 +88,7 @@ function diasEntre(dataIda, dataVolta) {
 }
 
 
-function abrirModalReco(reco){
+function abrirModalReco(reco) {
   recoSelecionada = reco;
   recoDestinoTxt.textContent = reco.destino;
   recoPrecoTxt.textContent = fmtBRL(reco.preco_passagem);
@@ -80,7 +98,7 @@ function abrirModalReco(reco){
   modalReco.style.display = "block";
 }
 
-function fecharModalReco(){
+function fecharModalReco() {
   modalReco.style.display = "none";
   recoSelecionada = null;
 }
@@ -99,41 +117,29 @@ btnComprarReco?.addEventListener("click", async () => {
     return;
   }
 
-  // Você pode trocar "recomendação" por algo que você quiser
-  const body = {
-    destino: recoSelecionada.destino,
-    caracteristica: "recomendação",
-    comprador,
-    data_ida: recoSelecionada.data_ida,
-    data_volta: recoSelecionada.data_volta
-  };
-
-  const resp = await fetch(`${API_BASE}/viagens`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "minha-chave": CLIENT_API_KEY
-    },
-    body: JSON.stringify(body)
-  });
+  const resp = await fetch(
+    `${API_BASE}/viagens/from-recomendacao/${recoSelecionada.id}`,
+    {
+      method: "POST",
+      headers: headersPadrao({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ comprador }),
+    }
+  );
 
   if (!resp.ok) {
-    const txt = await resp.text();
-    console.error("Erro POST /viagens:", txt);
+    console.error("Erro ao tentar realizar a compra", await resp.text());
     alert("Erro ao adicionar viagem.");
     return;
   }
 
   fecharModalReco();
   alert("Viagem adicionada!");
-
-  // Se você já tem função que recarrega viagens, chama aqui:
-  // carregarMunicipios... (no seu caso seria carregarViagens)
+  carregarViagens("inicio");
 });
 
-async function carregarRecomendacoes(){
+async function carregarRecomendacoes() {
   const resp = await fetch(`${API_BASE}/recomendacoes?limit=50&offset=0&ordem=desc`, {
-    headers: { "minha-chave": CLIENT_API_KEY }
+    headers: headersPadrao()
   });
 
   if (!resp.ok) {
@@ -170,7 +176,7 @@ async function carregarRecomendacoes(){
   });
 }
 
-function scrollReco(dir){
+function scrollReco(dir) {
   const amount = 300; // largura aproximada do card
   recoList.scrollLeft += dir * amount;
 }
@@ -178,9 +184,103 @@ function scrollReco(dir){
 recoPrev?.addEventListener("click", () => scrollReco(-1));
 recoNext?.addEventListener("click", () => scrollReco(1));
 
-document.addEventListener("DOMContentLoaded", () => {
-  carregarRecomendacoes();
+document.addEventListener("DOMContentLoaded", async () => {
+  if (!USER_TOKEN) {
+    mostrarLogin("Cole um token para entrar.");
+    return;
+  }
+
+  try {
+    await entrar(USER_TOKEN);
+  } catch (e) {
+    console.error(e);
+    sair();
+  }
 });
+
+function mostrarLogin(msg = "") {
+  loginMsg.textContent = msg;
+  loginOverlay.style.display = "flex";
+  if (tokenInput) tokenInput.value = USER_TOKEN || "";
+}
+
+function esconderLogin() {
+  loginOverlay.style.display = "none";
+  loginMsg.textContent = "";
+}
+
+async function carregarMe() {
+  const resp = await fetch(`${API_BASE}/users/me`, { headers: headersPadrao() });
+  if (!resp.ok) throw new Error(await resp.text());
+
+  const me = await resp.json();
+  CURRENT_ROLE = me.role;
+
+  if (userInfo) {
+    userInfo.textContent = `${me.nome} • ${me.role}`;
+  }
+
+  // esconde a seção de "Nova Viagem" para user comum
+  if (CURRENT_ROLE !== "adm") {
+    const cardNovaViagem = document.getElementById("btnSalvar")?.closest(".card");
+    if (cardNovaViagem) cardNovaViagem.style.display = "none";
+  }
+}
+
+async function entrar(token) {
+  USER_TOKEN = token.trim();
+  localStorage.setItem("USER_TOKEN", USER_TOKEN);
+
+  await carregarMe();       // valida token e pega role
+  esconderLogin();
+
+  // carrega dados depois de logar
+  await carregarRecomendacoes();
+  await carregarViagens("inicio");
+}
+
+function sair() {
+  localStorage.removeItem("USER_TOKEN");
+  USER_TOKEN = "";
+  CURRENT_ROLE = "user";
+  if (userInfo) userInfo.textContent = "";
+  mostrarLogin("Cole um token para entrar.");
+}
+
+btnLogin?.addEventListener("click", async () => {
+  try {
+    const t = (tokenInput.value || "").trim();
+    if (!t) return mostrarLogin("Informe um token.");
+
+    await entrar(t);
+  } catch (e) {
+    console.error(e);
+    mostrarLogin("Token inválido ou erro ao validar.");
+  }
+});
+
+btnLogout?.addEventListener("click", () => sair());
+
+
+
+async function carregarTokenUsuario() {
+  const resp = await fetch(`${API_BASE}/users/me`, { headers: headersPadrao() });
+
+  if (!resp.ok) {
+    console.error("Falha /users/me:", await resp.text());
+    alert("Token inválido ou ausente. Recarregue e informe o token correto.");
+    return;
+  }
+
+  const me = await resp.json();
+  CURRENT_ROLE = me.role;
+
+  // Se não for admin, esconde o formulário de inserir e remove botões de editar/deletar
+  if (CURRENT_ROLE !== "adm") {
+    const cardNovaViagem = btnSalvar?.closest(".card");
+    if (cardNovaViagem) cardNovaViagem.style.display = "none";
+  }
+}
 
 
 //
@@ -208,9 +308,11 @@ if (btnFecharModal) {
 function headersPadrao(extra = {}) {
   return {
     "minha-chave": CLIENT_API_KEY,
+    "x-user-token": USER_TOKEN,
     ...extra,
   };
 }
+
 
 // --------------------
 // Helpers
@@ -277,17 +379,23 @@ function criarCard(v) {
   const card = document.createElement("div");
   card.classList.add("card");
 
+    const actionsHtml = (CURRENT_ROLE === "adm")
+    ? `
+      <div class="card-actions">
+        <button class="btn-delete" onclick="deletar(${v.id})">Deletar</button>
+        <button class="btn-delete" onclick="modalEdicao(${v.id})">Editar</button>
+      </div>
+    `
+    : "";
+
   card.innerHTML = `
     <h3>${v.destino}</h3>
     <p><strong>Característica:</strong> ${v.caracteristica}</p>
     <p><strong>Comprador:</strong> ${v.comprador}</p>
     <p><strong>Ida:</strong> ${formatarDataBR(v.data_ida)} • <strong>Volta:</strong> ${formatarDataBR(v.data_volta)}</p>
-
-    <div class="card-actions">
-      <button class="btn-delete" onclick="deletar(${v.id})">Deletar</button>
-      <button class="btn-delete" onclick="modalEdicao(${v.id})">Editar</button>
-    </div>
+    ${actionsHtml}
   `;
+
 
   listagem.appendChild(card);
 }

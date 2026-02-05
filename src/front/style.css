@@ -90,7 +90,27 @@ body {
 .actions #btn_back {
   width: 44px;
   padding: 10px 0;
+  
 }
+
+.actions #btn_load_more {
+  background: var(--green);
+  color: var(--white);
+}
+
+.actions #btn_back {
+  background: var(--green);
+  color: var(--white);
+}
+
+.actions #btn{
+  background: var(--green);
+  color: var(--white);
+}
+
+
+
+.actip
 
 /* Layout */
 main {
@@ -110,7 +130,7 @@ main {
 
 .card h2 {
   margin: 0 0 12px;
-  font-size: 18px;
+  font-size: 22px;
   color: var(--green);
 }
 
@@ -442,3 +462,75 @@ body {
   font-weight: 800;
   cursor: pointer;
 }
+
+
+.login-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  z-index:9999;
+}
+
+.login-box{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:16px;
+}
+
+.login-box h2{ margin:0 0 8px; }
+.login-box p{ margin:0 0 10px; color:#6b7280; font-size:13px; }
+
+#tokenInput{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  margin:6px 0 10px;
+}
+
+#btnLogin{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid #539466;
+  background:#539466;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.login-msg{ margin:10px 0 0; font-size:13px; color:#b91c1c; }
+
+.userbar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+#userInfo{
+  color:#fff;
+  font-size:16px;
+  opacity:0.9;
+}
+
+#btnLogout{
+  border:1px solid rgba(255,255,255,0.4);
+  background:transparent;
+  color:#fff;
+  padding:8px 10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.userbar{
+  margin-left: 55vw;
+  font-size: 22px;
+}
+

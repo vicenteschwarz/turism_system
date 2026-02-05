@@ -4,16 +4,23 @@ const cors = require("cors");
 
 const viagensRouter = require("./routes/viagens");
 const recomendacoesRouter = require("./routes/recomendacoes");
-const autenticarAPIKey = require("./authorization");
+const userRouter = require("./routes/users");
+
+const { autenticarAPIKey, identificarUser } = require("./authorization");
 
 const app = express();
 app.use(cors())
 
 app.use(express.json());
 
+//authnticacçoes
+app.use(autenticarAPIKey);
+app.use(identificarUser);
+
 // API
-app.use("/viagens", autenticarAPIKey, viagensRouter);
-app.use("/recomendacoes", autenticarAPIKey, recomendacoesRouter);
+app.use("/viagens", viagensRouter);
+app.use("/recomendacoes", recomendacoesRouter);
+app.use("/users", userRouter);
 
 // Health check
 app.get("/", (req, res) => res.send("API Travel Up online ✅"));
