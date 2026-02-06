@@ -1,6 +1,6 @@
 const API_BASE =
   location.hostname.includes("onrender.com")
-    ? "https://SUA-API.onrender.com"
+    ? "https://turism-system-frontend.onrender.com"
     : "http://127.0.0.1:3000";
 
 const API = `${API_BASE}/viagens`;
@@ -157,7 +157,7 @@ async function carregarRecomendacoes() {
 
   recos.forEach((r) => {
     const dias = diasEntre(r.data_ida, r.data_volta);
-    const imgSrc = `../assets/recomendacoes/${r.imagem_ref}`; // arquivo local do projeto
+    const imgSrc = `./assets/recomendacoes/${r.imagem_ref}`; // arquivo local do projeto
 
     const card = document.createElement("div");
     card.className = "reco-card";
