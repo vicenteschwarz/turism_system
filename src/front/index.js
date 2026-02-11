@@ -1,6 +1,6 @@
 const API_BASE =
   location.hostname.includes("onrender.com")
-    ? "https://turism-system-frontend.onrender.com"
+    ? "https://turism-system-backend.onrender.com"
     : "http://127.0.0.1:3000";
 
 const API = `${API_BASE}/viagens`;
