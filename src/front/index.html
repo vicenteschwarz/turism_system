@@ -9,14 +9,32 @@
   <script src="index.js" defer></script>
 </head>
 
+<div id="carrinhoOverlay" class="carrinho-overlay">
+  <div class="carrinho-panel">
+    <div class="carrinho-header">
+      <h3>Seu Carrinho</h3>
+      <button onclick="fecharCarrinho()" class="fechar-carrinho">X</button>
+    </div>
+
+    <div id="carrinhoLista"></div>
+    <div class="cart-total-box">
+      <span>Total</span>
+      <strong id="cart-total">R$ 0,00</strong>
+    </div>
+
+    <button id="btnConfirmarCarrinho">Confirmar todas</button>
+  </div>
+</div>
+
+
 <body>
 
   <div class="login-overlay" id="loginOverlay">
     <div class="login-box">
       <h2>Entrar</h2>
-      <p>Cole seu token de usuário/adm</p>
+      <p>Digite sua senha para identificar seu usuário</p>
 
-      <input id="tokenInput" type="text" placeholder="ex: 0fe6b0b5-..." />
+      <input id="tokenInput" type="text" placeholder="Digite aqui..." />
       <button id="btnLogin" type="button">Entrar</button>
 
       <p class="login-msg" id="loginMsg"></p>
@@ -42,7 +60,7 @@
 
   <main>
 
-    <section class="reco-section">
+    <section class="reco-section" id="recoSection">
       <div class="reco-head">
         <h2>Recomendações</h2>
         <p>Escolha um destino e adicione como viagem!</p>
@@ -137,7 +155,7 @@
     </div>
 
     <section class="card">
-      <h2 class="lista-viagens">Lista de Viagens</h2>
+      <h2 id="tituloViagens" class="lista-viagens">Lista de Viagens</h2>
 
       <div class="actions">
         <button id="btn">Carregar viagens</button>
