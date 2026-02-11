@@ -39,7 +39,7 @@ async function identificarUser(req, res, next) {
     }
 
     const result = await pool.query(
-      "SELECT id, nome, role, ativo FROM public.users WHERE api_token::text = $1",
+      "SELECT id, nome, role, ativo FROM public.users WHERE senha::text = $1",
       [token]
     );
 

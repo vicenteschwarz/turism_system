@@ -331,9 +331,12 @@ if (btnFecharModal) {
 // Header padrão
 // --------------------
 function headersPadrao(extra = {}) {
+  const token = localStorage.getItem("USER_TOKEN");
+
   return {
+    "Content-Type": "application/json",
     "minha-chave": CLIENT_API_KEY,
-    "x-user-token": USER_TOKEN,
+    "x-user-token": token,
     ...extra,
   };
 }
