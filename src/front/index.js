@@ -8,6 +8,7 @@ const API = `${API_BASE}/viagens`;
 const CLIENT_API_KEY = "SUA_CHAVE_SECRETA_MUITO_FORTE_123456";
 
 let CARRINHO = [];
+let TODAS_RECOMENDACOES = []
 
 const listagem = document.getElementById("listagem");
 const btnCarregar = document.getElementById("btn");
@@ -138,16 +139,17 @@ btnComprarReco?.addEventListener("click", () => {
 
 async function carregarRecomendacoes() {
 
-  //se for admin, esconde a seção inteira e não carrega nada
+  // se for admin, esconde a seção inteira e não carrega nada
   if (CURRENT_ROLE === "adm") {
     const secao = document.getElementById("recoSection");
     if (secao) secao.style.display = "none";
     return;
   }
 
-  const resp = await fetch(`${API_BASE}/recomendacoes?limit=50&offset=0&ordem=desc`, {
-    headers: headersPadrao()
-  });
+  const resp = await fetch(
+    `${API_BASE}/recomendacoes?limit=50&offset=0&ordem=desc`,
+    { headers: headersPadrao() }
+  );
 
   if (!resp.ok) {
     console.error("Erro ao carregar recomendações:", await resp.text());
@@ -155,14 +157,26 @@ async function carregarRecomendacoes() {
   }
 
   const recos = await resp.json();
+
+  // salva no estado global
+  TODAS_RECOMENDACOES = recos;
+
+  //renderiza usando função separada
+  renderizarRecomendacoes(TODAS_RECOMENDACOES);
+}
+
+function renderizarRecomendacoes(lista) {
+
   recoList.innerHTML = "";
 
-  recos.forEach((r) => {
+  lista.forEach((r) => {
+
     const dias = diasEntre(r.data_ida, r.data_volta);
     const imgSrc = `./assets/recomendacoes/${r.imagem_ref}`;
 
     const card = document.createElement("div");
     card.className = "reco-card";
+
     card.innerHTML = `
       <img class="reco-img" src="${imgSrc}" alt="${r.destino}">
       <div class="reco-body">
@@ -179,9 +193,40 @@ async function carregarRecomendacoes() {
     `;
 
     card.addEventListener("click", () => abrirModalReco(r));
+
     recoList.appendChild(card);
   });
 }
+
+function aplicarFiltroRecomendacoes() {
+  const nome = document.getElementById("filtroNomeReco").value.toLowerCase();
+  const precoMax = Number(document.getElementById("filtroPrecoReco").value);
+
+  const filtradas = TODAS_RECOMENDACOES.filter(r => {
+
+    const matchNome =
+      !nome || r.destino.toLowerCase().includes(nome);
+
+    const matchPreco =
+      !precoMax || r.preco_passagem <= precoMax;
+
+    return matchNome && matchPreco;
+  });
+
+  renderizarRecomendacoes(filtradas);
+}
+
+//filtros
+
+document
+  .getElementById("filtroNomeReco")
+  .addEventListener("input", aplicarFiltroRecomendacoes);
+
+document
+  .getElementById("filtroPrecoReco")
+  .addEventListener("input", aplicarFiltroRecomendacoes);
+
+
 
 
 function scrollReco(dir) {
@@ -652,7 +697,7 @@ document.getElementById("btnConfirmarCarrinho")
     alert("Viagens confirmadas!");
   });
 
-  function calcularTotalCarrinho() {
+function calcularTotalCarrinho() {
   const total = CARRINHO.reduce((soma, item) => {
     return soma + Number(item.preco_passagem);
   }, 0);
