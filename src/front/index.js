@@ -178,7 +178,7 @@ function renderizarRecomendacoes(lista) {
     card.className = "reco-card";
 
     card.innerHTML = `
-      <img class="reco-img" src="${imgSrc}" alt="${r.destino}">
+      <img loading='lazy' class="reco-img" src="${imgSrc}" alt="${r.destino}">
       <div class="reco-body">
         <p class="reco-title">${r.destino} | ${dias} dias</p>
         <p class="reco-sub">Saindo de São Paulo</p>
