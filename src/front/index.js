@@ -271,7 +271,7 @@ async function carregarMe() {
   CURRENT_USER_NAME = me.nome;
 
   if (userInfo) {
-    userInfo.textContent = `${me.nome} • ${me.role}`;
+    userInfo.textContent = `${me.nome}`;
   }
 
   if (CURRENT_ROLE === "adm") {
