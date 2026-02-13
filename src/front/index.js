@@ -127,10 +127,15 @@ btnComprarReco?.addEventListener("click", () => {
     return;
   }
 
-  CARRINHO.push({
-    ...recoSelecionada,
-    comprador
+  fetch(`${API_BASE}/carrinho/adicionar`, {
+    method: "POST",
+    headers: headersPadrao(),
+    body: JSON.stringify({
+      recomendacao_id: recoSelecionada.id,
+      comprador
+    })
   });
+
 
   fecharModalReco();
   abrirCarrinho();
@@ -642,17 +647,25 @@ function fecharCarrinho() {
   overlay.style.display = "none";
 }
 
-function renderizarCarrinho() {
+async function renderizarCarrinho() {
   const lista = document.getElementById("carrinhoLista");
   lista.innerHTML = "";
 
-  CARRINHO.forEach((item, index) => {
+  const resp = await fetch(`${API_BASE}/carrinho`, {
+    headers: headersPadrao()
+  });
+
+  const itens = await resp.json();
+
+  itens.forEach((item) => {
+
     const div = document.createElement("div");
     div.className = "cart-item";
+
     div.innerHTML = `
       <div class="cart-item-header">
         <strong>${item.destino}</strong>
-        <button class="remove-btn" onclick="removerDoCarrinho(${index})">×</button>
+        <button class="remove-btn" onclick="removerDoCarrinho(${item.id})">×</button>
       </div>
 
       <div class="cart-price">${fmtBRL(item.preco_passagem)}</div>
@@ -660,38 +673,64 @@ function renderizarCarrinho() {
       <input 
         class="cart-input"
         type="text" 
-        value="${item.comprador}"
-        onchange="CARRINHO[${index}].comprador=this.value"
+        value="${item.comprador || ""}"
+        onchange="atualizarComprador(${item.id}, this.value)"
       >
     `;
 
     lista.appendChild(div);
   });
 
-  atualizarTotalUI(); // aqui chama a funç~cao da soma
+  atualizarTotalUIBanco(itens);
 }
 
 
-function removerDoCarrinho(index) {
-  CARRINHO.splice(index, 1);
+
+async function removerDoCarrinho(id) {
+  await fetch(`${API_BASE}/carrinho/${id}`, {
+    method: "DELETE",
+    headers: headersPadrao()
+  });
+
   renderizarCarrinho();
 }
+
+async function atualizarComprador(id, novoNome) {
+
+  if (!novoNome || novoNome.trim() === "") {
+    alert("Comprador não pode ficar vazio.");
+    renderizarCarrinho();
+    return;
+  }
+
+  await fetch(`${API_BASE}/carrinho/${id}`, {
+    method: "PUT",
+    headers: headersPadrao(),
+    body: JSON.stringify({
+      comprador: novoNome.trim()
+    })
+  });
+
+}
+
+
 
 document.getElementById("btnConfirmarCarrinho")
   ?.addEventListener("click", async () => {
 
-    for (let item of CARRINHO) {
-      await fetch(
-        `${API_BASE}/viagens/from-recomendacao/${item.id}`,
-        {
-          method: "POST",
-          headers: headersPadrao({ "Content-Type": "application/json" }),
-          body: JSON.stringify({ comprador: item.comprador }),
-        }
-      );
+    const resp = await fetch(
+      `${API_BASE}/carrinho/finalizar`,
+      {
+        method: "POST",
+        headers: headersPadrao()
+      }
+    );
+
+    if (!resp.ok) {
+      alert("Erro ao finalizar compra.");
+      return;
     }
 
-    CARRINHO = [];
     fecharCarrinho();
     carregarViagens("inicio");
     alert("Viagens confirmadas!");
@@ -705,7 +744,13 @@ function calcularTotalCarrinho() {
   return total;
 }
 
-function atualizarTotalUI() {
-  const total = calcularTotalCarrinho();
+function atualizarTotalUIBanco(itens) {
+  const total = itens.reduce((soma, item) => {
+    return soma + Number(item.preco_passagem);
+  }, 0);
+
   document.getElementById("cart-total").textContent = fmtBRL(total);
 }
+
+
+//registro do login

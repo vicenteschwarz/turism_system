@@ -5,6 +5,7 @@ const cors = require("cors");
 const viagensRouter = require("./routes/viagens");
 const recomendacoesRouter = require("./routes/recomendacoes");
 const userRouter = require("./routes/users");
+const carrinhoRouter = require('./routes/carrinho')
 
 const { autenticarAPIKey, identificarUser } = require("./authorization");
 
@@ -21,6 +22,7 @@ app.use(identificarUser);
 app.use("/viagens", viagensRouter);
 app.use("/recomendacoes", recomendacoesRouter);
 app.use("/users", userRouter);
+app.use('/carrinho', carrinhoRouter);
 
 // Health check
 app.get("/", (req, res) => res.send("API Travel Up online ✅"));
