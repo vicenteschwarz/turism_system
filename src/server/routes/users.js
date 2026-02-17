@@ -2,31 +2,29 @@ const express = require("express");
 const pool = require("../db");
 
 const router = express.Router();
-const { exigirUser, somenteAdm } = require("../authorization");
+const verificarToken = require("../middleware/verificarToken");
 
 
 
-// verifica o usuário fazendo get no banco na tabela de users
-router.get("/me", exigirUser, async (req, res) => {
-  // req.user vem da autenticação no authorization( identificarUser )
-  res.json({
-    id: req.user.id,
-    nome: req.user.nome,
-    role: req.user.role,
-    ativo: req.user.ativo
-  });
+router.get("/me", verificarToken, (req, res) => {
+  res.json(req.user);
 });
 
 
 //daqui pra baixo, so funções/recs que o admin possui (so admin tem)
 // Listar usuários (admin)
-router.get("/", somenteAdm, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const result = await pool.query(
       `SELECT id, nome, role, ativo, criado_em
        FROM public.users
        ORDER BY id DESC`
     );
+
+    if (req.user.role !== "adm") {
+   return res.status(403).json({ error: "Apenas admin" });
+}
+
     res.json(result.rows);
   } catch (err) {
     console.error("ERRO GET /users:", err);
@@ -36,13 +34,18 @@ router.get("/", somenteAdm, async (req, res) => {
 
 // Criar usuário (admin)
 // api_token vem do DEFAULT gen_random_uuid()
-router.post("/", somenteAdm, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { nome, role } = req.body;
 
     if (!nome) {
       return res.status(400).json({ error: "Campo obrigatório: nome" });
     }
+
+if (req.user.role !== "adm") {
+   return res.status(403).json({ error: "Apenas admin" });
+}
+
 
     const roleFinal = role === "adm" ? "adm" : "user";
 
@@ -62,10 +65,15 @@ router.post("/", somenteAdm, async (req, res) => {
 });
 
 // Atualizar user (admin)
-router.put("/:id", somenteAdm, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isInteger(id)) return res.status(400).json({ error: "ID inválido" });
+
+if (req.user.role !== "adm") {
+   return res.status(403).json({ error: "Apenas admin" });
+}
+
 
     const { nome, role, ativo } = req.body;
 

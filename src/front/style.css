@@ -374,6 +374,23 @@ input {
   font-weight: 700;
 }
 
+.reco-maps {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: #1a73e8;
+  color: white;
+  font-size: 13px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.reco-maps:hover {
+  background: #0f5ed7;
+}
+
+
 /* ===== FILTROS RECOMENDAÇÕES ===== */
 
 .filtros-reco {
@@ -439,16 +456,18 @@ input {
   inset: 0;
   background: rgba(0, 0, 0, 0.35);
   padding: 16px;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
-  max-width: 520px;
-  margin: 70px auto 0;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
+  max-width: 420px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px;
 }
+
 
 .modal-grid {
   display: grid;
@@ -579,8 +598,9 @@ input {
   border: 1px solid rgba(255, 255, 255, 0.4);
   background: transparent;
   color: #fff;
-  padding: 8px 10px;
+  padding: 11px 11px;
   border-radius: 10px;
+  font-size: 18px;
   cursor: pointer;
 }
 
@@ -877,4 +897,141 @@ input {
     padding: 12px;
   }
 
+}
+
+.card-actions {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex;
+}
+
+.btn-mapa {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #555;
+}
+
+.btn-mapa:hover {
+  background: #f3f3f3;
+  border-color: #aaa;
+  color: #000;
+}
+
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--green);
+  color: white;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.userbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+
+#btn-carrinho {
+  position: relative; /* 👈 ESSENCIAL */
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+#btn-carrinho img {
+  width: 28px;
+}
+
+#contador-carrinho {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Container para alinhar os botões lado a lado */
+.actions-viagens {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Estilo base para ambos os botões */
+.btn-editar, .btn-excluir {
+  padding: 8px 50px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  flex: 1; /* Faz os botões terem o mesmo tamanho */
+}
+
+/* Botão Editar (Azul Travel Up) */
+.btn-editar {
+  background-color: var(--green);
+  color: white;
+}
+
+.btn-editar:hover {
+  background-color: #4a845b;
+  transform: translateY(-2px);
+}
+
+/* Botão Excluir (Vermelho/Alerta) */
+.btn-excluir {
+  background-color: #9c6b6b;
+  color: white;
+}
+
+.btn-excluir:hover {
+  background-color: #831414;
+  transform: translateY(-2px);
+}
+
+/* Efeito de clique */
+.btn-editar:active, .btn-excluir:active {
+  transform: translateY(0);
+}
+
+.label-info {
+  font-weight: 700;
+  color: #363636; /* Um tom cinza escuro para diferenciar do dado real */
+  margin-right: 4px;
+}
+
+.user-nome-destaque {
+    color: var(--green); /* Um verde harmônico com o estilo do projeto */
+    font-weight: bold; /* Opcional: deixa o nome em negrito para destacar mais */
 }

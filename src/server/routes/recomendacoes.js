@@ -3,6 +3,9 @@ const pool = require("../db");
 
 const router = express.Router();
 
+const verificarToken = require("../middleware/verificarToken");
+
+
 // LISTAR (com filtros + paginação)
 router.get("/", async (req, res) => {
   try {
@@ -60,7 +63,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // INSERIR
-router.post("/", async (req, res) => {
+router.post("/",verificarToken, async (req, res) => {
   try {
     const { destino, preco_passagem, data_ida, data_volta, imagem_ref } = req.body;
 
@@ -93,7 +96,7 @@ router.post("/", async (req, res) => {
 });
 
 // ATUALIZAR
-router.put("/:id", async (req, res) => {
+router.put("/:id",verificarToken, async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isInteger(id)) return res.status(400).json({ error: "ID inválido" });
@@ -131,7 +134,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETAR
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",verificarToken, async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isInteger(id)) return res.status(400).json({ error: "ID inválido" });

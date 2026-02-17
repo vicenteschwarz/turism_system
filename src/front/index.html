@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Travel Up • Cadastro de Viagens</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="index.js" defer></script>
 </head>
 
 <div id="carrinhoOverlay" class="carrinho-overlay">
@@ -29,19 +28,6 @@
 
 <body>
 
-  <div class="login-overlay" id="loginOverlay">
-    <div class="login-box">
-      <h2>Entrar</h2>
-      <p>Digite sua senha para identificar seu usuário</p>
-
-      <input id="tokenInput" type="text" placeholder="Digite aqui..." />
-      <button id="btnLogin" type="button">Entrar</button>
-
-      <p class="login-msg" id="loginMsg"></p>
-    </div>
-  </div>
-
-
   <header class="topbar">
     <div class="brand">
       <img class="brand_up" src="./assets/travel_up_logo.png" alt="logo travel up" />
@@ -49,16 +35,22 @@
         <h1 class="big_text">Travel Up</h1>
         <p class="small_text">Cadastro de viagens</p>
       </div>
-      <div class="userbar">
-        <span id="userInfo"></span>
-        <button id="btnLogout" type="button">Sair</button>
-      </div>
     </div>
 
-
+    <div class="userbar">
+      <span id="userInfo"></span>
+      <button id="btnLogout" type="button">Sair</button>
+      <button id="btn-carrinho" onclick="abrirCarrinho()">
+        <span id="contador-carrinho">0</span>
+        <img src="assets/chart.png" alt="cart icon" />
+      </button>
+    </div>
   </header>
 
+
   <main>
+
+    <h2 id="tituloGerenciador"></h2>
 
     <section class="reco-section" id="recoSection">
       <div class="reco-head">
@@ -67,8 +59,9 @@
       </div>
 
       <div class="filtros-reco">
-        <input type="text" id="filtroNomeReco" placeholder="Buscar destino..." />
-        <input type="number" id="filtroPrecoReco" placeholder="Preço máximo" />
+        <input type="text" id="filtro-destino" placeholder="Buscar destino..." oninput="aplicarFiltros()">
+
+        <input type="number" id="filtro-preco" placeholder="Preço máximo" oninput="aplicarFiltros()">
       </div>
 
       <div class="reco-wrap">
@@ -117,7 +110,7 @@
     </div>
 
 
-    <section class="card">
+    <section id="painel-insert" class="card">
       <h2>Nova Viagem</h2>
 
       <div class="form">
@@ -172,7 +165,7 @@
     </section>
 
   </main>
-
+  <script src="index.js"></script>
 </body>
 
 </html>

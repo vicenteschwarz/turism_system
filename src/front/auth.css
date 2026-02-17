@@ -1,0 +1,122 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* FUNDO IGUAL AO SISTEMA */
+body {
+  background-color: #f2f4f3;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ÁREA CENTRAL */
+#auth-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* CARD LOGIN */
+#login-box,
+#register-box {
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* TÍTULO */
+#login-box h3,
+#register-box h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 22px;
+  color: #2f3e34;
+}
+
+/* INPUTS */
+#login-box input,
+#register-box input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background-color: #fafafa;
+}
+
+#login-box input:focus,
+#register-box input:focus {
+  outline: none;
+  border-color: #5c9368;
+  box-shadow: 0 0 0 3px rgba(92, 147, 104, 0.15);
+  background-color: white;
+}
+
+/* BOTÃO */
+#login-box button,
+#register-box button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background-color: #5c9368;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#login-box button:hover,
+#register-box button:hover {
+  background-color: #4b7d58;
+  transform: translateY(-2px);
+}
+
+/* LINKS */
+#login-box p,
+#register-box p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #5c9368;
+  transition: 0.2s;
+}
+
+#login-box p:hover,
+#register-box p:hover {
+  text-decoration: underline;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVO */
+@media (max-width: 480px) {
+  #login-box,
+  #register-box {
+    padding: 30px 20px;
+  }
+}
