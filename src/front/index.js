@@ -453,6 +453,12 @@ function abrirModalReco(id, destino, preco, ida, volta) {
   recoPrecoTxt.textContent = fmtBRL(preco);
   recoIdaTxt.textContent = ida.slice(0, 10);
   recoVoltaTxt.textContent = volta.slice(0, 10);
+
+  const inputComprador = document.getElementById("recoComprador");
+  if (inputComprador) {
+    inputComprador.value = CURRENT_USER?.nome || "";
+  }
+
   document.getElementById("modalReco").style.display = "flex";
 }
 
@@ -462,32 +468,53 @@ document.getElementById("btnFecharReco")?.addEventListener("click", () => {
 });
 
 async function adicionarCarrinho() {
-  const comprador = document.getElementById("recoComprador").value?.trim();
+  // 1. Captura o valor do input (que deve ser preenchido no abrirModalReco)
+  const compradorInput = document.getElementById("recoComprador");
+  const comprador = compradorInput ? compradorInput.value.trim() : "";
 
-  if (!recomendacaoSelecionada || !comprador) {
-    alert("Preencha o nome do comprador.");
+  // 2. Validação básica
+  if (!recomendacaoSelecionada) {
+    alert("Nenhuma recomendação selecionada.");
+    return;
+  }
+
+  if (!comprador) {
+    alert("Por favor, preencha o nome do comprador.");
     return;
   }
 
   try {
+    // 3. Faz a requisição para o servidor
     const res = await fetch(`${API_BASE}/carrinho/adicionar`, {
       method: "POST",
       headers: headersAuth(),
       body: JSON.stringify({
         recomendacao_id: Number(recomendacaoSelecionada),
-        comprador
+        comprador: comprador
       }),
     });
 
+    // 4. Se o servidor responder com sucesso (status 200-299)
     if (res.ok) {
+      // Fecha o modal de detalhes
       document.getElementById("modalReco").style.display = "none";
-      document.getElementById("recoComprador").value = "";
-      atualizarContadorCarrinho();
+      
+      // Limpa o campo para a próxima vez
+      if (compradorInput) compradorInput.value = "";
+
+      // Atualiza o número no ícone do carrinho
+      await atualizarContadorCarrinho();
+      
+      // Abre o painel lateral do carrinho automaticamente
+      abrirCarrinho(); 
+      
     } else {
-      alert("Erro ao adicionar no carrinho.");
+      const erroData = await res.json();
+      alert(`Erro ao adicionar: ${erroData.error || "Erro desconhecido"}`);
     }
   } catch (err) {
-    console.error(err);
+    console.error("Erro na requisição do carrinho:", err);
+    alert("Não foi possível conectar ao servidor.");
   }
 }
 
@@ -510,12 +537,14 @@ async function abrirCarrinho() {
 
   itens.forEach((item) => {
     total += Number(item.preco_passagem);
+    const nomeExibicao = item.comprador || CURRENT_USER?.nome || 'Viajante Anônimo';
 
     lista.innerHTML += `
       <div class="cart-item">
-        <strong>${item.destino}</strong>
+        <strong class="cart-item-destino">${item.destino}</strong>
         <p>R$ ${item.preco_passagem}</p>
-        <button onclick="removerCarrinho(${item.id})">Remover</button>
+        <p> ${nomeExibicao} </p>
+        <button class=btn-remover-carrinho onclick="removerCarrinho(${item.id})">Remover</button>
       </div>
     `;
   });

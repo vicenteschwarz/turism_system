@@ -752,151 +752,124 @@ input {
 
 /* media querys fodásticos*/
 
-/*768*/
-
+/* (768px) */
+   
 @media (max-width: 768px) {
-
+  /* Topbar: Ajuste para não espremer o conteúdo */
   .topbar {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    padding: 20px;
+    height: auto;
+    text-align: center;
+  }
+
+  .brand {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .brand_up {
+    width: 150px;
+    height: 150px;
   }
 
   .brand h1 {
-    font-size: 22px;
+    font-size: 28px; /* Remove o 3vw que fica minúsculo no tablet */
   }
 
   .brand p {
-    font-size: 14px;
+    font-size: 16px; /* Remove o 1.5vw */
   }
 
-  .actions {
+  .userbar {
+    margin-left: 0;
     width: 100%;
-    justify-content: flex-start;
+    justify-content: center;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 15px;
   }
 
-  main {
-    padding: 0 12px 24px;
-    padding-bottom: 90px;
-  }
-
-  /* Grid vira 2 colunas */
+  /* Grid de Viagens: 2 colunas */
   .container {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Form fica 1 coluna */
+  /* Recomendações: Ajuste de títulos */
+  .reco-head h2 { font-size: 24px; }
+  .reco-head p { font-size: 16px; }
+
+  /* Carrinho */
+  .carrinho-panel {
+    width: 350px;
+  }
+}
+
+/* (425px)*/
+
+@media (max-width: 425px) {
+  /* Topbar Mobile */
+  .brand_up {
+    width: 100px;
+    height: 100px;
+  }
+
+  .brand h1 { font-size: 22px; }
+
+  /* Formulário de Nova Viagem: 1 coluna */
   .form {
     grid-template-columns: 1fr;
   }
 
-  /* Recomendações */
-  .reco-head h2 {
-    font-size: 20px;
-  }
-
-  .reco-head p {
-    font-size: 14px;
-  }
-
-  .reco-card {
-    min-width: 240px;
-    max-width: 240px;
-  }
-
-  /* Carrinho menor */
-  .carrinho-panel {
-    width: 320px;
-  }
-
-}
-
-
-
-/*480*/
-
-@media (max-width: 480px) {
-
-  .topbar {
-    padding: 12px;
-  }
-
-  .brand_up {
-    width: 120px;
-    height: 120px;
-  }
-
-  .brand h1 {
-    font-size: 18px;
-  }
-
-  .brand p {
-    font-size: 12px;
-  }
-
+  /* Botões de Ação da Lista (Carregar/Setas) */
   .actions {
-    flex-wrap: wrap;
-    gap: 6px;
+    justify-content: center;
+  }
+  
+  .actions button#btn {
+    width: 100%; /* Botão carregar ocupa tudo */
+    order: -1;
   }
 
-  .actions button {
-    flex: 1;
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  /* Lista vira 1 coluna */
+  /* Lista de Viagens: 1 coluna (Card Cheio) */
   .container {
     grid-template-columns: 1fr;
   }
 
-  .card {
-    padding: 14px;
+  /* Cards de Viagem: Ajuste dos botões internos */
+  .actions-viagens {
+    flex-direction: column; /* Botão excluir fica embaixo do editar */
   }
 
-  .card h2 {
-    font-size: 18px;
+  .btn-editar, .btn-excluir {
+    width: 100%;
+    padding: 12px;
   }
 
-  /* Recomendações */
-  .reco-wrap {
-    gap: 6px;
-  }
-
+  /* Slider de Recomendações */
   .reco-nav {
-    display: none;
-    /* remove setas no mobile */
+    display: none; /* Em celular o usuário usa o dedo (swipe) */
   }
 
   .reco-card {
-    min-width: 220px;
-    max-width: 220px;
+    min-width: 85vw; /* Card quase tela cheia */
   }
 
-  .reco-img {
-    height: 140px;
-  }
-
-  /* Modal ocupa quase tela toda */
-  .modal-content {
-    margin: 30px auto 0;
-    width: 95%;
-  }
-
-  /* Carrinho ocupa tela toda */
+  /* Carrinho Mobile */
   .carrinho-panel {
     width: 100%;
-    padding: 16px;
   }
 
-  .cart-item {
-    padding: 12px;
+  /* Filtros Mobile */
+  .filtros-reco input {
+    min-width: 100%;
   }
 
-  #btnConfirmarCarrinho {
-    padding: 12px;
+  /* Modal de Compra */
+  .modal-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
-
 }
 
 .card-actions {
@@ -1011,12 +984,12 @@ input {
 
 /* Botão Excluir (Vermelho/Alerta) */
 .btn-excluir {
-  background-color: #9c6b6b;
+  background-color: #e23939;
   color: white;
 }
 
 .btn-excluir:hover {
-  background-color: #831414;
+  background-color: #ff0000;
   transform: translateY(-2px);
 }
 
@@ -1034,4 +1007,21 @@ input {
 .user-nome-destaque {
     color: var(--green); /* Um verde harmônico com o estilo do projeto */
     font-weight: bold; /* Opcional: deixa o nome em negrito para destacar mais */
+}
+
+.btn-remover-carrinho {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: var(--green);
+  padding: 6px 10px;
+  border-radius: 10px;
+  border-color: #4a8061;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cart-item-destino{
+  font-size: 21px;
+  color: var(--green);
 }

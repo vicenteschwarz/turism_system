@@ -120,3 +120,15 @@ body {
     padding: 30px 20px;
   }
 }
+
+@media (max-width: 425px) {
+  #login-box, #register-box {
+    padding: 25px 15px;
+    margin: 10px;
+    box-shadow: none; /* Remove sombra para parecer mais limpo no mobile */
+  }
+  
+  #auth-area h3 {
+    font-size: 1.5rem;
+  }
+}
