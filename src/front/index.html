@@ -164,6 +164,31 @@
       <div id="listagem" class="container"></div>
     </section>
 
+    <section class="card" id="painelGerenciarUsuarios">
+    <h2>Gerenciamento de Usuários</h2>
+    <div class="actions" style="margin-bottom: 15px;">
+        <button id="btnAnteriorUsuarios" class="btn-paginacao">←</button>
+        <span id="infoPaginaUsuarios" class="label">Página 1</span>
+        <button id="btnProximoUsuarios" class="btn-paginacao">→</button>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Cargo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="listaUsuariosBody">
+                </tbody>
+        </table>
+    </div>
+</section>
+
   </main>
   <script src="index.js"></script>
 </body>

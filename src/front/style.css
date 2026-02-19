@@ -850,8 +850,19 @@ input {
     display: none; /* Em celular o usuário usa o dedo (swipe) */
   }
 
+  .reco-slider{
+    display: flex; /* Garante que fiquem lado a lado */
+    flex-wrap: nowrap; /* Impede que quebrem linha */
+    overflow-x: auto; /* Habilita o scroll lateral */
+    -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
+    gap: 15px;
+    padding: 10px;
+    scroll-snap-type: x mandatory; /* Faz os cards "travarem" na tela ao scrolar */
+  }
+
   .reco-card {
     min-width: 85vw; /* Card quase tela cheia */
+    scroll-snap-align: center;
   }
 
   /* Carrinho Mobile */
@@ -1024,4 +1035,81 @@ input {
 .cart-item-destino{
   font-size: 21px;
   color: var(--green);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--white);
+}
+
+.user-table th {
+    background: #f8faf9;
+    color: var(--muted);
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid var(--border);
+}
+
+.user-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+
+.user-table tr:hover {
+    background-color: #f3f6f4; /* Efeito hover igual ao seu bg */
+}
+
+.btn-paginacao {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-user-excluir {
+    background: #9c6b6b;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Esconde por padrão */
+#painelAdminUsuarios {
+    display: none;
+}
+
+#painelGerenciarUsuarios {
+    display: none; /* Só será exibido via JS se for admin */
+}
+
+/* Estilo para o container que segura os cards */
+#listagem {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os cards quebrem linha no desktop */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente se houver altura */
+  min-height: 150px;       /* Garante um espaço mínimo para a mensagem */
+  width: 100%;
+}
+
+/* Estilo específico para a mensagem de lista vazia */
+.msg-vazia {
+  width: 100%;             /* Ocupa a largura toda para ficar sozinho na linha */
+  text-align: center;      /* Centraliza o texto internamente */
+  color: var(--muted);     /* Usa a cor suave que você já definiu */
+  font-size: 1.1rem;
+  padding: 40px 20px;
 }

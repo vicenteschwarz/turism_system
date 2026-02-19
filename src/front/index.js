@@ -85,6 +85,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     configurarInterface();
     registrarEventos();
     carregarViagens();
+    carregarUsuarios();
+    gerenciarVisualizacaoAdmin();
 
     if (CURRENT_ROLE === 'adm') {
       document.getElementById("tituloGerenciador").textContent = 'Painel do Administrador';
@@ -199,8 +201,8 @@ async function carregarViagens() {
 
     // 5. Verificação de lista vazia
     if (viagens.length === 0) {
-      container.innerHTML = "<p style='text-align:center; width:100%; margin-top: 20px; margin-left: 25vw;'>Fim dos registros ou nenhuma viagem encontrada.</p>";
-      return;
+      // Removido o margin-left fixo para permitir a centralização flexível
+      container.innerHTML = "<p class='msg-vazia'>Fim dos registros ou nenhuma viagem encontrada.</p>"; return;
     }
 
     // 6. Renderização dos Cards
@@ -360,14 +362,9 @@ function renderizarRecomendacoes(lista) {
   if (!container) return;
 
   dadosFiltradosCards = lista;
-
-  // Lógica de corte para a página atual
-  const inicio = (paginaCards - 1) * limiteCards;
-  const fim = inicio + limiteCards;
-  const itensExibidos = lista.slice(inicio, fim);
-
   container.innerHTML = "";
 
+  // 1. Verificação de lista vazia
   if (lista.length === 0) {
     container.innerHTML = `
             <div style="width:100%; text-align:center; padding: 20px;">
@@ -376,7 +373,21 @@ function renderizarRecomendacoes(lista) {
     return;
   }
 
-  itensExibidos.forEach((r) => {
+  // 2. Lógica de exibição Híbrida:
+  let itensParaExibir;
+
+  if (window.innerWidth <= 425) {
+    // No Mobile, mostramos todos para que o CSS (overflow-x: auto) permita o scroll lateral
+    itensParaExibir = lista;
+  } else {
+    // No Desktop/Tablet, mantemos a paginação de 4 em 4
+    const inicio = (paginaCards - 1) * limiteCards;
+    const fim = inicio + limiteCards;
+    itensParaExibir = lista.slice(inicio, fim);
+  }
+
+  // 3. Renderização dos cards
+  itensParaExibir.forEach((r) => {
     const dias = calcularDias(r.data_ida, r.data_volta);
     const imgSrc = `assets/recomendacoes/${r.imagem_ref}`;
 
@@ -384,9 +395,9 @@ function renderizarRecomendacoes(lista) {
     card.className = "reco-card";
     card.innerHTML = `
             <img loading="lazy" class="reco-img" 
-                 src="${imgSrc}" 
-                 alt="${r.destino}"
-                 onerror="this.src='assets/placeholder.webp'">
+                  src="${imgSrc}" 
+                  alt="${r.destino}"
+                  onerror="this.src='assets/placeholder.webp'">
             <div class="reco-body">
                 <p class="reco-title">${r.destino} | ${dias} dias</p>
                 <p class="reco-sub">Saindo de São Paulo</p>
@@ -406,6 +417,7 @@ function renderizarRecomendacoes(lista) {
         `;
 
     card.addEventListener("click", (e) => {
+      // Evita abrir o modal se o usuário clicar apenas no link do mapa
       if (e.target.tagName === "A") return;
       abrirModalReco(r.id, r.destino, r.preco_passagem, r.data_ida, r.data_volta);
     });
@@ -498,16 +510,16 @@ async function adicionarCarrinho() {
     if (res.ok) {
       // Fecha o modal de detalhes
       document.getElementById("modalReco").style.display = "none";
-      
+
       // Limpa o campo para a próxima vez
       if (compradorInput) compradorInput.value = "";
 
       // Atualiza o número no ícone do carrinho
       await atualizarContadorCarrinho();
-      
+
       // Abre o painel lateral do carrinho automaticamente
-      abrirCarrinho(); 
-      
+      abrirCarrinho();
+
     } else {
       const erroData = await res.json();
       alert(`Erro ao adicionar: ${erroData.error || "Erro desconhecido"}`);
@@ -595,5 +607,131 @@ async function atualizarContadorCarrinho() {
 
 function logout() {
   localStorage.removeItem("token");
+
+  const painel = document.getElementById("painelGerenciarUsuarios");
+  if (painel) painel.style.display = "none";
+
   window.location.href = "auth.html";
 }
+
+let paginaUsuarios = 1;
+const limiteUsuarios = 20;
+
+async function carregarUsuarios() {
+  try {
+    const res = await fetch(`${API_BASE}/users?page=${paginaUsuarios}&limit=${limiteUsuarios}`, {
+      headers: headersAuth()
+    });
+
+    const data = await res.json();
+    console.log("Dados recebidos do banco:", data); // <--- ADICIONE ISSO
+
+    if (data.usuarios && Array.isArray(data.usuarios)) {
+      renderizarTabelaUsuarios(data.usuarios);
+      document.getElementById("infoPaginaUsuarios").textContent = `Página ${paginaUsuarios}`;
+    } else {
+      console.warn("A chave 'usuarios' não foi encontrada ou não é uma lista", data);
+    }
+  } catch (err) {
+    console.error("Erro ao carregar usuários:", err);
+  }
+}
+
+
+
+function renderizarTabelaUsuarios(usuarios) {
+  const tbody = document.getElementById("listaUsuariosBody");
+  if (!tbody) return;
+
+  tbody.innerHTML = "";
+
+  if (usuarios.length === 0) {
+    tbody.innerHTML = "<tr><td colspan='5' style='text-align:center'>Nenhum usuário encontrado.</td></tr>";
+    return;
+  }
+
+  usuarios.forEach(user => {
+    const tr = document.createElement("tr");
+
+    // Verificamos os nomes exatos que vem do seu SELECT no back-end
+    const nome = user.nome || "Sem nome";
+    const email = user.email || "---"; // Se não houver email no select, virá ---
+    const cargo = user.role || "user";
+    const status = user.ativo ? "Ativo" : "Inativo";
+
+    tr.innerHTML = `
+            <td>${user.id}</td>
+            <td class="user-nome-destaque">${nome}</td>
+            <td>${email}</td>
+            <td><span class="label">${cargo.toUpperCase()}</span></td>
+            <td>
+                <button class="btn-user-excluir" onclick="deletarUsuario(${user.id})">Remover</button>
+            </td>
+        `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Substitua as duas funções de verificação por esta única:
+function gerenciarVisualizacaoAdmin() {
+  // Tenta encontrar o painel por qualquer um dos IDs que você usou
+  const painel = document.getElementById("painelGerenciarUsuarios") ||
+    document.getElementById("painelAdminUsuarios");
+
+  if (!painel) return;
+
+  if (CURRENT_ROLE === 'adm') {
+    painel.style.display = "block";
+    carregarUsuarios(); // Só busca do banco se for admin
+  } else {
+    painel.style.display = "none";
+    // Limpamos a tabela para não sobrar rastros de dados se o role mudar
+    const tbody = document.getElementById("listaUsuariosBody");
+    if (tbody) tbody.innerHTML = "";
+  }
+}
+
+// CHAME ESTA FUNÇÃO:
+// 1. Dentro da sua função de inicialização (DOMContentLoaded)
+// 2. Logo após o sucesso do login
+
+async function deletarUsuario(id) {
+  // 1. Confirmação de segurança
+  if (!confirm(`Tem certeza que deseja remover o usuário ID ${id}?`)) {
+    return;
+  }
+
+  try {
+    // 2. Requisição DELETE para o servidor (usando /users conforme seu server.js)
+    const res = await fetch(`${API_BASE}/users/${id}`, {
+      method: "DELETE",
+      headers: headersAuth()
+    });
+
+    if (res.ok) {
+      alert("Usuário removido com sucesso!");
+      // 3. Recarrega a tabela para atualizar a lista
+      carregarUsuarios();
+    } else {
+      const erro = await res.json();
+      alert(`Erro ao excluir: ${erro.error || "Não autorizado"}`);
+    }
+  } catch (err) {
+    console.error("Erro ao deletar usuário:", err);
+    alert("Erro de conexão ao tentar excluir o usuário.");
+  }
+}
+
+// Eventos de Paginação
+document.getElementById("btnAnteriorUsuarios").onclick = () => {
+  if (paginaUsuarios > 1) {
+    paginaUsuarios--;
+    carregarUsuarios();
+  }
+};
+
+document.getElementById("btnProximoUsuarios").onclick = () => {
+  paginaUsuarios++;
+  carregarUsuarios();
+};
+
