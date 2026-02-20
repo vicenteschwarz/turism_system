@@ -214,7 +214,7 @@ async function carregarViagens() {
       card.innerHTML = `
         <h3>${v.destino}</h3>
         <p><span class="label-info">Característica:</span> ${v.caracteristica}</p>
-        <p><span class="label-info">Comprador:</span> <strong>${v.comprador}</strong></p>
+        <p><span class="label-info">Comprador:</span> <strong>${document.getElementById('cart-item-comprador')?.textContent}</strong></p>
         <p><span class="label-info">Período:</span> ${v.data_ida?.slice(0, 10)} até ${v.data_volta?.slice(0, 10)}</p>
       `;
 
@@ -469,6 +469,7 @@ function abrirModalReco(id, destino, preco, ida, volta) {
   const inputComprador = document.getElementById("recoComprador");
   if (inputComprador) {
     inputComprador.value = CURRENT_USER?.nome || "";
+    inputComprador.readOnly = true;
   }
 
   document.getElementById("modalReco").style.display = "flex";
@@ -555,7 +556,7 @@ async function abrirCarrinho() {
       <div class="cart-item">
         <strong class="cart-item-destino">${item.destino}</strong>
         <p>R$ ${item.preco_passagem}</p>
-        <p> ${nomeExibicao} </p>
+        <p id="cart-item-comprador">${nomeExibicao}</p>
         <button class=btn-remover-carrinho onclick="removerCarrinho(${item.id})">Remover</button>
       </div>
     `;
