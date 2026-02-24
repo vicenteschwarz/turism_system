@@ -2,7 +2,7 @@ console.log("Sistema iniciado");
 
 const API_BASE =
   location.hostname.includes("onrender.com")
-    ? "https://turism-system-backend.onrender.com"
+    ? "https://turism-system-backend-test.onrender.com"
     : "http://127.0.0.1:3000";
 
 let CURRENT_USER = null;
