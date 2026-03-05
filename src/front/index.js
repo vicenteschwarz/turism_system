@@ -37,18 +37,6 @@ function gerarImagemDestino(destino) {
   return `https://source.unsplash.com/600x400/?${encodeURIComponent(destino)},travel`;
 }
 
-function aplicarFiltros() {
-  const nome = filtroNomeReco.value.toLowerCase();
-  const precoMax = Number(filtroPrecoReco.value);
-
-  const filtradas = RECOMENDACOES_CACHE.filter(r => {
-    const matchNome = r.destino.toLowerCase().includes(nome);
-    const matchPreco = !precoMax || r.preco_passagem <= precoMax;
-    return matchNome && matchPreco;
-  });
-
-  renderizarRecomendacoes(filtradas);
-}
 
 
 
@@ -427,15 +415,34 @@ function renderizarRecomendacoes(lista) {
 }
 
 // 4. Lógica de Filtros (Resetando a página para 1)
+
 function aplicarFiltros() {
-  paginaCards = 1; // Volta para o início ao filtrar
-  const termo = document.getElementById("filtro-destino").value.toLowerCase().trim();
-  const precoMax = parseFloat(document.getElementById("filtro-preco").value) || Infinity;
+  paginaCards = 1; // Reseta para a primeira página ao filtrar
+
+  // Captura os valores dos inputs (ajuste os IDs se necessário conforme seu HTML)
+  const inputDestino = document.getElementById("filtro-destino") || document.getElementById("filtroNomeReco");
+  const inputPreco = document.getElementById("filtro-preco") || document.getElementById("filtroPrecoReco");
+
+  // Normaliza o termo de busca (remove acentos e espaços)
+  const termo = inputDestino.value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+
+  const precoMax = parseFloat(inputPreco.value) || Infinity;
 
   const filtrados = RECOMENDACOES_CACHE.filter(r => {
-    const matchNome = r.destino.toLowerCase().includes(termo);
+    // Normaliza o destino do banco de dados para comparar
+    const destinoNormalizado = r.destino
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+    
+    const matchNome = destinoNormalizado.includes(termo);
     const preco = parseFloat(r.preco_passagem);
     const matchPreco = isNaN(preco) || preco <= precoMax;
+    
     return matchNome && matchPreco;
   });
 

@@ -58,11 +58,27 @@ async function login() {
   }
 }
 
+function validarEmail(email) {
+  // Regex padrão para validar e-mails
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+
 async function registrar() {
   try {
     const nome = document.getElementById("register-nome").value.trim();
     const email = document.getElementById("register-email").value.trim();
     const senha = document.getElementById("register-senha").value.trim();
+
+    if (!validarEmail(email)) {
+      throw new Error("Por favor, insira um e-mail válido (exemplo@dominio.com).");
+    }
+
+    if (senha.length < 4) {
+        throw new Error("A senha deve ter pelo menos 4 caracteres.");
+    }
+
 
     const res = await fetch(`${API_BASE}/auth/register`, {
       method: "POST",
