@@ -200,11 +200,11 @@ async function carregarViagens() {
 
       // Conteúdo com labels informativos
       card.innerHTML = `
-        <h3>${v.destino}</h3>
-        <p><span class="label-info">Característica:</span> ${v.caracteristica}</p>
-        <p><span class="label-info">Comprador:</span> <strong>${document.getElementById('cart-item-comprador')?.textContent}</strong></p>
-        <p><span class="label-info">Período:</span> ${v.data_ida?.slice(0, 10)} até ${v.data_volta?.slice(0, 10)}</p>
-      `;
+  <h3>${v.destino}</h3>
+  <p><span class="label-info">Característica:</span> ${v.caracteristica}</p>
+  <p><span class="label-info">Comprador:</span> <strong>${v.comprador || "Não informado"}</strong></p>
+  <p><span class="label-info">Período:</span> ${v.data_ida?.slice(0, 10)} até ${v.data_volta?.slice(0, 10)}</p>
+`;
 
       // Logica de botões por permissão
       const acoesDiv = document.createElement("div");
@@ -438,11 +438,11 @@ function aplicarFiltros() {
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    
+
     const matchNome = destinoNormalizado.includes(termo);
     const preco = parseFloat(r.preco_passagem);
     const matchPreco = isNaN(preco) || preco <= precoMax;
-    
+
     return matchNome && matchPreco;
   });
 
