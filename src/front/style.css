@@ -123,8 +123,39 @@ main {
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 16px;
-  margin: 14px 0;
+  margin: 14px 0; /* Remova a margem de 14px que estava aqui */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 250px; /* Altura mínima para padronizar os cards vazios */
 }
+
+.card p{
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.caracteristica-texto {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.caracteristica-texto span:last-child{
+  word-break: break-word;
+}
+
+.label-info {
+  font-weight: bold;
+  color: #363636;
+  min-width: 95px; /* Largura fixa para alinhar o início de todos os textos */
+  flex-shrink: 0;   /* Impede o label de amassar */
+}
+
+
 
 .card h2 {
   margin: 0 0 12px;
@@ -180,8 +211,10 @@ input {
 /* Listagem */
 .container {
   display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(3, 1fr); /* Força 3 colunas iguais */
+  gap: 16px;
+  width: 100%;
+  align-items: stretch; /* Faz todos os cards terem a mesma altura na mesma linha */
 }
 
 /* Caso você crie cards de viagem via JS */
@@ -236,6 +269,19 @@ input {
   display: flex;
   gap: 10px;
   margin-top: 8px;
+}
+
+#modalConfirmacao .modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#modalConfirmacao p {
+  margin: 15px 0;
+  color: #555;
+  text-align: center;
 }
 
 #btnSalvar_alteracao {
@@ -1009,11 +1055,7 @@ input {
   transform: translateY(0);
 }
 
-.label-info {
-  font-weight: 700;
-  color: #363636; /* Um tom cinza escuro para diferenciar do dado real */
-  margin-right: 4px;
-}
+
 
 .user-nome-destaque {
     color: var(--green); /* Um verde harmônico com o estilo do projeto */

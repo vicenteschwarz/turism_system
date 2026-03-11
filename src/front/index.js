@@ -152,6 +152,27 @@ function registrarEventos() {
   document.getElementById("filtroPrecoReco")
     ?.addEventListener("input", aplicarFiltros);
 
+  document.getElementById("btnConfirmarExclusao")?.addEventListener("click", async () => {
+    if (idParaDeletarGlobal) {
+      // Aqui entra o seu código original de exclusão
+      await fetch(`${API_BASE}/viagens/${idParaDeletarGlobal}`, {
+        method: "DELETE",
+        headers: headersAuth(),
+      });
+
+      // Fecha o modal e limpa tudo
+      document.getElementById("modalConfirmacao").style.display = "none";
+      idParaDeletarGlobal = null;
+
+      // Atualiza a lista na tela
+      carregarViagens();
+    }
+  });
+
+  document.getElementById("btnCancelarExclusao")?.addEventListener("click", () => {
+    document.getElementById("modalConfirmacao").style.display = "none";
+    idParaDeletarGlobal = null;
+  });
 }
 
 /* ========================
@@ -200,10 +221,19 @@ async function carregarViagens() {
 
       // Conteúdo com labels informativos
       card.innerHTML = `
-  <h3>${v.destino}</h3>
-  <p><span class="label-info">Característica:</span> ${v.caracteristica}</p>
-  <p><span class="label-info">Comprador:</span> <strong>${v.comprador || "Não informado"}</strong></p>
-  <p><span class="label-info">Período:</span> ${v.data_ida?.slice(0, 10)} até ${v.data_volta?.slice(0, 10)}</p>
+    <h3>${v.destino}</h3>
+    <p class="caracteristica-texto">
+        <span class="label-info">Característica:</span>
+        <span>${v.caracteristica}</span>
+    </p>
+    <p class="caracteristica-texto">
+        <span class="label-info">Comprador:</span>
+        <strong>${v.comprador || "Não informado"}</strong>
+    </p>
+    <p class="caracteristica-texto">
+        <span class="label-info">Período:</span>
+        <span>${v.data_ida?.slice(0, 10)} até ${v.data_volta?.slice(0, 10)}</span>
+    </p>
 `;
 
       // Logica de botões por permissão
@@ -220,7 +250,7 @@ async function carregarViagens() {
       } else if (CURRENT_ROLE === "user") {
         // Usuário vê apenas Excluir
         acoesDiv.innerHTML = `
-          <button class="btn-excluir" style="width: 100%" onclick="deletar(${v.id})">Excluir minha viagem</button>
+          <button class="btn-excluir" style="width: 100%" onclick="deletar(${v.id})">Cancelar minha viagem</button>
         `;
         card.appendChild(acoesDiv);
       }
@@ -268,13 +298,18 @@ async function inserirViagem() {
   carregarViagens();
 }
 
-async function deletar(id) {
-  await fetch(`${API_BASE}/viagens/${id}`, {
-    method: "DELETE",
-    headers: headersAuth(),
-  });
+// Variável para guardar o ID temporariamente
+let idParaDeletarGlobal = null;
 
-  carregarViagens();
+async function deletar(id) {
+  // Guarda o ID para saber quem excluir depois
+  idParaDeletarGlobal = id;
+
+  // Mostra o modal (certifique-se de que o ID no HTML seja 'modalConfirmacao')
+  const modal = document.getElementById("modalConfirmacao");
+  if (modal) {
+    modal.style.display = "flex";
+  }
 }
 
 /* ========================
