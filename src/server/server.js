@@ -22,7 +22,7 @@ app.use(express.json());
 // API
 app.use("/viagens", verificarToken, viagensRouter);
 app.use("/recomendacoes", verificarToken, recomendacoesRouter);
-app.use("/users", verificarToken, userRouter);
+app.use("/users", userRouter);
 app.use("/carrinho", verificarToken, carrinhoRouter);
 app.use("/auth", authRouter);
 
