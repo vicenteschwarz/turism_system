@@ -88,7 +88,7 @@ if (req.user.role !== "adm") {
 
     const result = await pool.query(
       `INSERT INTO public.users (nome, role)
-       VALUES ($1, $2, $3, $4)
+       VALUES ($1, $2)
        RETURNING id, nome, role, ativo, senha, email, criado_em`,
       [nome, roleFinal]
     );
