@@ -90,7 +90,7 @@ if (req.user.role !== "adm") {
       `INSERT INTO public.users (nome, role)
        VALUES ($1, $2)
        RETURNING id, nome, role, ativo, api_token, criado_em`,
-      [nome, roleFinal]
+      [nome, role] //role == roleFinal
     );
 
     // Aqui faz sentido retornar api_token (pra você copiar e usar no front)
