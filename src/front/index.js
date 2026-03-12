@@ -67,8 +67,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     CURRENT_USER = user;
     CURRENT_ROLE = user.role;
 
-    document.getElementById("userInfo").textContent =
-      `${user.nome} (${user.role})`;
+    // --- NOVA LÓGICA DE AVATAR E DROPDOWN ---
+    // Gera as iniciais (ex: "João Silva" vira "JS")
+    const nomes = user.nome.split(' ');
+    const iniciais = (nomes[0][0] + (nomes[1] ? nomes[1][0] : '')).toUpperCase();
+    
+    document.getElementById("userAvatar").textContent = iniciais;
+    document.getElementById("userName").textContent = user.nome;
+    document.getElementById("userRoleText").textContent = user.role.toUpperCase();
+
+    // Lógica de toggle do menu dropdown
+    const profile = document.getElementById("userProfile");
+    profile.addEventListener("click", (e) => {
+      e.stopPropagation(); // Evita que o clique feche o menu imediatamente
+      profile.classList.toggle("active");
+    });
+
+    // Fecha ao clicar fora
+    window.addEventListener("click", () => {
+      profile.classList.remove("active");
+    });
+    // ----------------------------------------
 
     configurarInterface();
     registrarEventos();
@@ -114,9 +133,6 @@ function configurarInterface() {
 ======================== */
 
 function registrarEventos() {
-  document
-    .getElementById("btnLogout")
-    ?.addEventListener("click", logout);
 
   document
     .getElementById("btnSalvar")
@@ -152,6 +168,9 @@ function registrarEventos() {
   document.getElementById("filtroPrecoReco")
     ?.addEventListener("input", aplicarFiltros);
 
+  document.getElementById("btnLogoutDropdown")?.addEventListener("click", logout);
+   
+    
   document.getElementById("btnConfirmarExclusao")?.addEventListener("click", async () => {
     if (idParaDeletarGlobal) {
       // Aqui entra o seu código original de exclusão
@@ -649,11 +668,11 @@ async function atualizarContadorCarrinho() {
 ======================== */
 
 function logout() {
+  console.log("Logout disparado!"); // Isso aparecerá no Console (F12)
+  
   localStorage.removeItem("token");
 
-  const painel = document.getElementById("painelGerenciarUsuarios");
-  if (painel) painel.style.display = "none";
-
+  // Redirecionamento forçado
   window.location.href = "auth.html";
 }
 

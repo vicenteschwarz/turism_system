@@ -38,12 +38,22 @@
     </div>
 
     <div class="userbar">
-      <span id="userInfo"></span>
-      <button id="btnLogout" type="button">Sair</button>
       <button id="btn-carrinho" onclick="abrirCarrinho()">
         <span id="contador-carrinho">0</span>
         <img src="assets/chart.png" alt="cart icon" />
       </button>
+
+      <div class="user-profile" id="userProfile">
+        <div class="avatar" id="userAvatar">--</div>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <div class="dropdown-info">
+            <strong id="userName">Usuário</strong>
+            <span id="userRoleText">Cargo</span>
+          </div>
+          
+          <button id="btnLogoutDropdown" type="button">Sair</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -165,41 +175,41 @@
     </section>
 
     <section class="card" id="painelGerenciarUsuarios">
-    <h2>Gerenciamento de Usuários</h2>
-    <div class="actions" style="margin-bottom: 15px;">
+      <h2>Gerenciamento de Usuários</h2>
+      <div class="actions" style="margin-bottom: 15px;">
         <button id="btnAnteriorUsuarios" class="btn-paginacao">←</button>
         <span id="infoPaginaUsuarios" class="label">Página 1</span>
         <button id="btnProximoUsuarios" class="btn-paginacao">→</button>
-    </div>
-    
-    <div class="table-responsive">
-        <table class="user-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Cargo</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="listaUsuariosBody">
-                </tbody>
-        </table>
-    </div>
-</section>
+      </div>
 
-<div class="modal" id="modalConfirmacao">
-  <div class="modal-content">
-    <h2>Confirmação</h2>
-    <p id="msgConfirmacao">Tem certeza que deseja excluir esta viagem?</p>
-    
-    <div class="modal-actions">
-      <button id="btnConfirmarExclusao" class="btn-excluir">Sim, excluir</button>
-      <button id="btnCancelarExclusao" class="btn-editar" type="button">Não, voltar</button>
+      <div class="table-responsive">
+        <table class="user-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Cargo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="listaUsuariosBody">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="modal" id="modalConfirmacao">
+      <div class="modal-content">
+        <h2>Confirmação</h2>
+        <p id="msgConfirmacao">Tem certeza que deseja excluir esta viagem?</p>
+
+        <div class="modal-actions">
+          <button id="btnConfirmarExclusao" class="btn-excluir">Sim, excluir</button>
+          <button id="btnCancelarExclusao" class="btn-editar" type="button">Não, voltar</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
   </main>
   <script src="index.js"></script>
