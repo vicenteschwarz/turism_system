@@ -87,10 +87,10 @@ if (req.user.role !== "adm") {
     const roleFinal = role === "adm" ? "adm" : "user";
 
     const result = await pool.query(
-      `INSERT INTO public.users (nome, role)
-       VALUES ($1, $2)
+      `INSERT INTO public.users (nome, role, ativo, senha, email, criado_em)
+       VALUES ($1, $2, $3, $4, $5, NOW())
        RETURNING id, nome, role, ativo, senha, email, criado_em`,
-      [nome, roleFinal]
+      [nome, roleFinal, true, null, null, null]
     );
 
     // Aqui faz sentido retornar api_token (pra você copiar e usar no front)
