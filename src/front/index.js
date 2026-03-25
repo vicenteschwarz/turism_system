@@ -311,7 +311,7 @@ async function inserirViagem() {
     return
   }
 
-  if (new Date(data_volta) > new Date(data_ida)) {
+  if (new Date(data_volta) < new Date(data_ida)) {
     alert('A data de volta não pode ser anterior a data de ida!')
     return
   }
