@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Gera as iniciais (ex: "João Silva" vira "JS")
     const nomes = user.nome.split(' ');
     const iniciais = (nomes[0][0] + (nomes[1] ? nomes[1][0] : '')).toUpperCase();
-    
+
     document.getElementById("userAvatar").textContent = iniciais;
     document.getElementById("userName").textContent = user.nome;
     document.getElementById("userRoleText").textContent = user.role.toUpperCase();
@@ -169,8 +169,8 @@ function registrarEventos() {
     ?.addEventListener("input", aplicarFiltros);
 
   document.getElementById("btnLogoutDropdown")?.addEventListener("click", logout);
-   
-    
+
+
   document.getElementById("btnConfirmarExclusao")?.addEventListener("click", async () => {
     if (idParaDeletarGlobal) {
       // Aqui entra o seu código original de exclusão
@@ -300,21 +300,57 @@ document.getElementById("btn_load_more")?.addEventListener("click", () => {
 });
 
 async function inserirViagem() {
+  const destino = campoDestino.value.trim();
+  const caracteristica = campoCaracteristica.value.trim();
+  const comprador = campoComprador.value.trim();
+  const data_ida = campoDataIda.value;
+  const data_volta = campoDataVolta.value;
+
+  if (!destino || !caracteristica || !comprador || !data_ida || !data_volta) {
+    alert('Preencha todos os campos antes de prosseguir!')
+    return
+  }
+
+  if (new Date(data_volta) > new Date(data_ida)) {
+    alert('A data de volta não pode ser anterior a data de ida!')
+    return
+  }
+
   const body = {
-    destino: campoDestino.value,
-    caracteristica: campoCaracteristica.value,
-    comprador: campoComprador.value,
-    data_ida: campoDataIda.value,
-    data_volta: campoDataVolta.value,
-  };
+    destino,
+    caracteristica,
+    comprador,
+    data_ida,
+    data_volta,
+  }
 
-  await fetch(`${API_BASE}/viagens`, {
-    method: "POST",
-    headers: headersAuth(),
-    body: JSON.stringify(body),
-  });
+  try {
+    const response = await fetch(`${API_BASE}/viagens`, {
+      method: 'POST',
+      headers: headersAuth(),
+      body: JSON.stringfy(body)
+    })
 
-  carregarViagens();
+    if (response.ok) {
+      const erro = await response.json()
+      throw new Error(erro.error || 'Erro ao inserir viagem!')
+    }
+
+    limparCampos()
+    carregarViagens()
+
+  } catch (err) {
+    console.erro('Erro na inserção', err)
+    alert('Erro ao salvar!' + err.message)
+  }
+};
+
+function limparCampos() {
+  campoDestino.value = "";
+  campoCaracteristica.value = "";
+  campoComprador.value = "";
+  campoDataIda.value = "";
+  campoDataVolta.value = "";
 }
 
 // Variável para guardar o ID temporariamente
@@ -669,7 +705,7 @@ async function atualizarContadorCarrinho() {
 
 function logout() {
   console.log("Logout disparado!"); // Isso aparecerá no Console (F12)
-  
+
   localStorage.removeItem("token");
 
   // Redirecionamento forçado
