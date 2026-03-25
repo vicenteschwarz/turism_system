@@ -331,13 +331,14 @@ async function inserirViagem() {
       body: JSON.stringify(body)
     })
 
-    if (response.ok) {
+    if (!response.ok) {
       const erro = await response.json()
       throw new Error(erro.error || 'Erro ao inserir viagem!')
     }
 
     limparCampos()
     carregarViagens()
+    alert('Viagem cadastrada com sucesso!')
 
   } catch (err) {
     console.error('Erro na inserção', err)
