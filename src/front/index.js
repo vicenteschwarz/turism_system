@@ -328,7 +328,7 @@ async function inserirViagem() {
     const response = await fetch(`${API_BASE}/viagens`, {
       method: 'POST',
       headers: headersAuth(),
-      body: JSON.stringfy(body)
+      body: JSON.stringify(body)
     })
 
     if (response.ok) {
