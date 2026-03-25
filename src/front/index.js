@@ -340,7 +340,7 @@ async function inserirViagem() {
     carregarViagens()
 
   } catch (err) {
-    console.erro('Erro na inserção', err)
+    console.error('Erro na inserção', err)
     alert('Erro ao salvar!' + err.message)
   }
 };
