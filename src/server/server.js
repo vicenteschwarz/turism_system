@@ -12,7 +12,7 @@ const authRouter = require("./routes/auth");
 
 
 const app = express();
-app.use(cors())
+app.use(cors({origin: 'https://turism-system-frontend.onrender.com'}))
 
 app.use(express.json());
 

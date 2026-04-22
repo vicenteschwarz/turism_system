@@ -910,7 +910,33 @@ input {
 
 
 
-
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+ 
+.skeleton-line {
+  background: linear-gradient(
+    90deg,
+    #e8ede9 25%,
+    #d5ded9 50%,
+    #e8ede9 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+  display: block;
+}
+ 
+/* ---- BOTÃO SALVAR DESABILITADO ---- */
+#btnSalvar:disabled,
+#btnSalvar_alteracao:disabled,
+#btnComprarReco:disabled,
+#btnConfirmarCarrinho:disabled,
+#btnConfirmarExclusao:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+#btn { display: none !important; }
 
 
 /* media querys fodásticos*/
