@@ -14,7 +14,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #a4a5a8;
+  background: #cccdd0;
   color: var(--text);
 }
 
@@ -645,7 +645,7 @@ input {
   width: 100%;
   max-width: 420px;
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #2f3e34;
   border-radius: 16px;
   padding: 16px;
 }
