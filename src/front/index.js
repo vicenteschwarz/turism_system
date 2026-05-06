@@ -391,7 +391,7 @@ async function carregarViagens() {
         const dias = calcularDias(v.data_ida, v.data_volta);
         if (dias > 0) {
           duracao = `<span style="
-            background:#eaf5ef;color:#3d7050;
+            background:#b6d2c3;color:#3d7050;
             font-size:11px;font-weight:700;
             padding:2px 8px;border-radius:20px;
             margin-left:8px;vertical-align:middle;
