@@ -1,27 +1,12 @@
-/* ============================================================
-   TRAVEL UP — style.css
-   ============================================================ */
-
-/* ──────────────────────────────────────────────────────────
-   VARIÁVEIS GLOBAIS
-   ────────────────────────────────────────────────────────── */
 :root {
-  --green:        #539466;
-  --green-dark:   #4a845b;
-  --white:        #ffffff;
-  --bg:           #f3f6f4;
-  --text:         #1b1f1c;
-  --muted:        #6b7b73;
-  --border:       #d5ded9;
-
-  /* inputs */
-  --input-bg:     #d6d3d3;
-  --input-border: #b0aeae;
+  --green: #539466;
+  --white: #ffffff;
+  --bg: #f3f6f4;
+  --text: #1b1f1c;
+  --muted: #6b7b73;
+  --border: #d5ded9;
 }
 
-/* ──────────────────────────────────────────────────────────
-   RESET & BASE
-   ────────────────────────────────────────────────────────── */
 * {
   box-sizing: border-box;
 }
@@ -29,26 +14,44 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #f5f7fb;
+  background: #cccdd0;
   color: var(--text);
 }
 
-/* ──────────────────────────────────────────────────────────
-   TOPBAR
-   ────────────────────────────────────────────────────────── */
+/* Topo */
 .topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background-color: var(--green);
+  background: var(--green);
   color: var(--white);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+
+.big_text h1 {
+  font-size: 100px;
+  margin: 0;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 26px;
+  line-height: 1;
+  background: var(--white);
+  color: var(--green);
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .brand_up {
@@ -68,369 +71,9 @@ body {
   color: #eaf5ef;
 }
 
-/* ──────────────────────────────────────────────────────────
-   USERBAR
-   ────────────────────────────────────────────────────────── */
-.userbar {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.user-profile {
-  position: relative;
-  cursor: pointer;
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  background-color: #5d9b71;
-  color: var(--white);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-}
-
-.user-profile:hover .avatar {
-  border-color: var(--white);
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  background: var(--white);
-  min-width: 180px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  display: none;
-  flex-direction: column;
-  padding: 10px;
-  z-index: 100;
-}
-
-.user-profile.active .dropdown-menu {
-  display: flex;
-}
-
-.dropdown-info {
-  padding: 5px 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.dropdown-info strong { font-size: 14px; color: #333; }
-.dropdown-info span   { font-size: 12px; color: #888; }
-
-#btnLogoutDropdown {
-  background: #ff4d4d;
-  color: var(--white);
-  border: none;
-  padding: 8px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 5px;
-}
-
-/* ──────────────────────────────────────────────────────────
-   BOTÃO CARRINHO
-   ────────────────────────────────────────────────────────── */
-#btn-carrinho {
-  position: relative;
-  background: var(--white);
-  border: none;
-  border-radius: 12px;
-  padding: 8px 16px;
-  cursor: pointer;
-}
-
-#btn-carrinho img {
-  width: 28px;
-}
-
-#contador-carrinho {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: red;
-  color: var(--white);
-  font-size: 12px;
-  font-weight: bold;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ──────────────────────────────────────────────────────────
-   LAYOUT PRINCIPAL
-   ────────────────────────────────────────────────────────── */
-main {
-  max-width: 1100px;
-  margin: 18px auto 30px;
-  padding: 0 16px 30px;
-}
-
-/* ──────────────────────────────────────────────────────────
-   CARDS DE VIAGEM
-   ────────────────────────────────────────────────────────── */
-.card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px;
-  margin: 14px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  min-height: 250px;
-}
-
-.card h2 {
-  margin: 0 0 12px;
-  font-size: 22px;
-  color: var(--green);
-}
-
-.card p {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.caracteristica-texto {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  margin: 8px 0;
-  font-size: 14px;
-}
-
-.caracteristica-texto span:last-child {
-  word-break: break-word;
-}
-
-.label-info {
-  font-weight: bold;
-  color: #363636;
-  min-width: 95px;
-  flex-shrink: 0;
-}
-
-/* Badge de característica */
-.span {
-  background: #acd4be;
-  color: #3d7050;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 20px;
-  margin-left: 8px;
-  vertical-align: middle;
-}
-
-/* Listagem grid */
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: 100%;
-  align-items: stretch;
-}
-
-#listagem {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  min-height: 150px;
-  width: 100%;
-}
-
-.msg-vazia {
-  width: 100%;
-  text-align: center;
-  color: var(--muted);
-  font-size: 1.1rem;
-  padding: 40px 20px;
-}
-
-/* Botões dentro dos cards de viagem */
-.card-actions {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: flex;
-}
-
-.actions-viagens {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.btn-editar,
-.btn-excluir {
-  padding: 8px 50px;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.85rem;
-  flex: 1;
-}
-
-.btn-editar {
-  background-color: var(--green);
-  color: var(--white);
-}
-
-.btn-editar:hover {
-  background-color: var(--green-dark);
-  transform: translateY(-2px);
-}
-
-.btn-excluir {
-  background-color: #e23939;
-  color: var(--white);
-}
-
-.btn-excluir:hover {
-  background-color: #ff0000;
-  transform: translateY(-2px);
-}
-
-.btn-editar:active,
-.btn-excluir:active {
-  transform: translateY(0);
-}
-
-.btn-mapa {
-  background: transparent;
-  border: 1px solid #ddd;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #555;
-}
-
-.btn-mapa:hover {
-  background: #f3f3f3;
-  border-color: #aaa;
-  color: #000;
-}
-
-/* ──────────────────────────────────────────────────────────
-   FORMULÁRIO
-   ────────────────────────────────────────────────────────── */
-.form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.label {
-  grid-column: 1 / -1;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 6px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 500;
-}
-
-/* ──────────────────────────────────────────────────────────
-   INPUTS — background cinza + borda sutil
-   ────────────────────────────────────────────────────────── */
-input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--input-border);
-  border-radius: 10px;
-  background: var(--input-bg);
-  color: var(--text);
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-input:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(83, 148, 102, 0.15);
-}
-
-input::placeholder {
-  color: #888;
-}
-
-/* Inputs dentro do login box (mantêm o mesmo padrão) */
-#login-box input,
-#register-box input {
-  background: var(--input-bg);
-  border: 1px solid var(--input-border);
-  padding: 12px 14px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  font-size: 14px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-#login-box input:focus,
-#register-box input:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(83, 148, 102, 0.15);
-}
-
-/* Input do carrinho (comprador) */
-.cart-input {
-  width: 100%;
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--input-border);
-  background: var(--input-bg);
-}
-
-/* ──────────────────────────────────────────────────────────
-   BOTÕES PRIMÁRIOS
-   ────────────────────────────────────────────────────────── */
-#btnSalvar {
-  grid-column: 1 / -1;
-  background: var(--green);
-  color: var(--white);
-  border: 1px solid var(--green);
-  padding: 12px;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-#btnSalvar:hover { background: var(--green-dark); }
-
-.btn-delete {
-  background: var(--white);
-  color: var(--green);
-  border: 1px solid var(--border);
-  padding: 12px;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-/* ──────────────────────────────────────────────────────────
-   PAGINAÇÃO
-   ────────────────────────────────────────────────────────── */
 .actions {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -448,47 +91,174 @@ input::placeholder {
 .actions #btn_back {
   width: 44px;
   padding: 10px 0;
+
+}
+
+.actions #btn_load_more {
   background: var(--green);
   color: var(--white);
 }
 
-/* Botão "Carregar viagens" escondido (carga automática via JS) */
-#btn { display: none !important; }
-
-.btn-paginacao {
+.actions #btn_back {
   background: var(--green);
   color: var(--white);
-  border: none;
-  padding: 5px 15px;
-  border-radius: 8px;
+}
+
+.actions #btn {
+  background: var(--green);
+  color: var(--white);
+}
+
+
+/* Layout */
+main {
+  max-width: 1100px;
+  margin: 18px auto 30px;
+  padding: 0 16px 30px;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border: 1px solid #6b7b73;
+  border-radius: 14px;
+  padding: 16px;
+  margin: 14px 0; /* Remova a margem de 14px que estava aqui */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 250px; /* Altura mínima para padronizar os cards vazios */
+}
+
+.card p{
+  word-wrap: break-word;
+  overflow-wrap: break-word;  
+}
+
+.caracteristica-texto {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.caracteristica-texto span:last-child{
+  word-break: break-word;
+}
+
+.span{
+    background: #acd4be;
+    color: #3d7050;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.label-info {
+  font-weight: bold;
+  color: #363636;
+  min-width: 95px; /* Largura fixa para alinhar o início de todos os textos */
+  flex-shrink: 0;   /* Impede o label de amassar */
+}
+
+
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  color: var(--green);
+}
+
+/* Form */
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.label {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--text);
+  outline: none;
+}
+
+.btn-delete {
+  background: var(--white);
+  color: var(--green);
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
   cursor: pointer;
+}
+
+#btnSalvar {
+  grid-column: 1 / -1;
+  background: var(--green);
+  color: var(--white);
+  border: 1px solid var(--green);
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Listagem */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Força 3 colunas iguais */
+  gap: 16px;
+  width: 100%;
+  align-items: stretch; /* Faz todos os cards terem a mesma altura na mesma linha */
+}
+
+/* Caso você crie cards de viagem via JS */
+.viagem {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--white);
+}
+
+.viagem h3 {
+  margin: 0 0 6px;
   font-size: 16px;
-  transition: background-color 0.2s;
+  color: var(--green);
 }
 
-.btn-paginacao:hover {
-  background-color: var(--green-dark);
+.viagem p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: var(--text);
 }
 
-/* ──────────────────────────────────────────────────────────
-   MODAIS
-   ────────────────────────────────────────────────────────── */
+/* Modal */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.35);
   padding: 16px;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
 }
 
 .modal-content {
   max-width: 520px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
   margin: 60px auto 0;
   background: var(--white);
   border: 1px solid var(--border);
@@ -512,28 +282,9 @@ input::placeholder {
   margin-top: 8px;
 }
 
-.modal-grid {
-  display: grid;
-  gap: 8px;
-  margin: 10px 0 12px;
-}
-
-.modal-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-
-.muted {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* Modal de confirmação */
 #modalConfirmacao .modal-actions {
+  display: flex;
+  gap: 10px;
   justify-content: center;
   margin-top: 20px;
 }
@@ -544,90 +295,61 @@ input::placeholder {
   text-align: center;
 }
 
-/* Botões dos modais */
-#btnSalvar_alteracao,
-#btnComprarReco {
-  flex: 1;
+#btnSalvar_alteracao {
   background: var(--green);
   color: var(--white);
   border: 1px solid var(--green);
   padding: 10px 12px;
-  border-radius: 12px;
-  font-weight: 800;
+  border-radius: 10px;
+  font-weight: 700;
   cursor: pointer;
-}
-
-#btnSalvar_alteracao:hover,
-#btnComprarReco:hover {
-  background: var(--green-dark);
-}
-
-#btnFecharModal,
-#btnFecharReco {
   flex: 1;
+}
+
+#btnFecharModal {
   background: var(--white);
   color: var(--green);
   border: 1px solid var(--border);
   padding: 10px 12px;
-  border-radius: 12px;
-  font-weight: 800;
+  border-radius: 10px;
+  font-weight: 700;
   cursor: pointer;
+  flex: 1;
 }
 
-/* ──────────────────────────────────────────────────────────
-   LOGIN OVERLAY
-   ────────────────────────────────────────────────────────── */
-.login-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: none;
+
+.actions {
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  z-index: 9999;
+  gap: 15px; /* Espaço entre os itens */
 }
 
-.login-box {
-  width: 100%;
-  max-width: 420px;
-  background: var(--white);
-  border: 1px solid #979797;
-  border-radius: 16px;
-  padding: 16px;
-}
-
-.login-box h2 { margin: 0 0 8px; }
-
-.login-box p {
-  margin: 0 0 10px;
-  color: #6b7280;
-  font-size: 13px;
-}
-
-#btnLogin {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--green);
-  background: var(--green);
-  color: var(--white);
-  font-weight: 800;
+.btn-paginacao {
+  /* Estilo padrão de sistema */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  padding: 8px 16px;
   cursor: pointer;
-  transition: background 0.2s;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: background-color 0.2s;
 }
 
-#btnLogin:hover { background: var(--green-dark); }
-
-.login-msg {
-  margin: 10px 0 0;
-  font-size: 13px;
-  color: #b91c1c;
+.btn-paginacao:hover {
+  background-color: #e0e0e0;
 }
 
-/* ──────────────────────────────────────────────────────────
-   RECOMENDAÇÕES
-   ────────────────────────────────────────────────────────── */
+.label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+}
+
+/* Recomendações */
 .reco-section {
   max-width: 1100px;
   margin: 0 0 30px;
@@ -682,13 +404,22 @@ input::placeholder {
   scroll-snap-align: start;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  overflow: hidden;
 }
 
+/* Efeito de aumento no Hover */
 .reco-card:hover {
   transform: scale(1.02);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
+/* Esconder os detalhes/botões extras que você quer mostrar só no hover */
+/* Se quiser que o botão de "Adicionar" apareça subindo: */
+.reco-card .reco-foot {
+  transition: 0.3s;
+}
+
+/* Se você quiser esconder o botão de ação e mostrar no hover: */
 .reco-card .btn-reco-acao {
   opacity: 0;
   transform: translateY(10px);
@@ -706,6 +437,7 @@ input::placeholder {
   object-fit: cover;
   display: block;
 }
+
 
 .reco-body {
   padding: 12px 14px 10px;
@@ -747,6 +479,7 @@ input::placeholder {
   color: #2E8B57;
 }
 
+
 .reco-foot {
   border-top: 1px solid var(--border);
   padding: 10px 14px;
@@ -754,7 +487,6 @@ input::placeholder {
   font-size: 12px;
   color: var(--text);
   font-weight: 700;
-  transition: 0.3s;
 }
 
 .reco-maps {
@@ -762,53 +494,65 @@ input::placeholder {
   margin-top: 8px;
   padding: 6px 10px;
   background: #1a73e8;
-  color: var(--white);
+  color: white;
   font-size: 13px;
   border-radius: 6px;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: 0.2s;
 }
 
 .reco-maps:hover {
   background: #0f5ed7;
 }
 
-/* Filtros de recomendações */
+
+/* ===== FILTROS RECOMENDAÇÕES ===== */
+
 .filtros-reco {
   width: 100%;
-  max-width: 1100px;
-  margin: 20px auto 30px;
+  max-width: 1100px; /* mesma largura visual dos cards */
+  margin: 20px auto 30px auto; /* centraliza */
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
 }
+
+/* Inputs agora lado a lado */
 
 .filtros-reco input {
   flex: 1;
   min-width: 220px;
   padding: 14px 18px;
   border-radius: 18px;
-  border: 1px solid var(--input-border);
-  background: var(--input-bg);
+  border: 1px solid #e4e7eb;
+  background: #ffffff;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease;
+}
+
+.filtros-reco input::placeholder {
+  color: #9aa1a9;
 }
 
 .filtros-reco input:focus {
-  border-color: var(--green);
+  border-color: #539466;
   box-shadow: 0 0 0 4px rgba(83, 148, 102, 0.15);
 }
 
+/* Botão principal */
+
 #btnFiltrarReco {
-  background: var(--green);
-  color: var(--white);
+  background: #539466;
+  color: #ffffff;
 }
 
 #btnFiltrarReco:hover {
-  background: var(--green-dark);
+  background: #4a845b;
   transform: translateY(-1px);
 }
+
+/* Botão secundário */
 
 #btnLimparReco {
   background: #f1f3f5;
@@ -819,9 +563,236 @@ input::placeholder {
   background: #e4e7eb;
 }
 
-/* ──────────────────────────────────────────────────────────
-   CARRINHO (SIDEBAR)
-   ────────────────────────────────────────────────────────── */
+
+/* Modal (reaproveita sua classe .modal se já tiver) */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 420px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+
+.modal-grid {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-top: 6px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+#btnComprarReco {
+  flex: 1;
+  background: var(--green);
+  color: var(--white);
+  border: 1px solid var(--green);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#btnFecharReco {
+  flex: 1;
+  background: var(--white);
+  color: var(--green);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 9999;
+}
+
+#login-box input, #register-box input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background-color: #dad5d5;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid #979797;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.login-box h2 {
+  margin: 0 0 8px;
+}
+
+.login-box p {
+  margin: 0 0 10px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+#tokenInput {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin: 6px 0 10px;
+}
+
+#btnLogin {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #539466;
+  background: #539466;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.login-msg {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: #b91c1c;
+}
+
+
+#userInfo {
+  color: #fff;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+#btnLogout {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #fff;
+  padding: 11px 11px;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+
+.userbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #5d9b71; /* Cor padrão */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.user-profile:hover .avatar {
+  border-color: #fff;
+}
+
+/* Menu Dropdown oculto por padrão */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  display: none; /* Escondido */
+  flex-direction: column;
+  padding: 10px;
+  z-index: 100;
+}
+
+.user-profile.active .dropdown-menu {
+  display: flex; /* Mostra ao clicar */
+}
+
+.dropdown-info {
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-info strong { font-size: 14px; color: #333; }
+.dropdown-info span { font-size: 12px; color: #888; }
+
+#btnLogoutDropdown {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+
 .carrinho-overlay {
   position: fixed;
   inset: 0;
@@ -835,11 +806,11 @@ input::placeholder {
 .carrinho-panel {
   width: 420px;
   height: 100%;
-  background: var(--white);
+  background: #ffffff;
   padding: 24px;
   overflow-y: auto;
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
-  animation: slideIn 0.35s ease;
+  animation: slideIn .35s ease;
   display: flex;
   flex-direction: column;
 }
@@ -856,25 +827,13 @@ input::placeholder {
   font-size: 20px;
 }
 
-.fechar-carrinho {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: transparent;
-  font-size: 18px;
-  cursor: pointer;
-  color: var(--green);
-  border: none;
-  border-radius: 5px;
-}
-
 .cart-item {
   border: 1px solid #e5e7eb;
   border-radius: 14px;
   padding: 14px;
   margin-bottom: 14px;
   background: #fafafa;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: 0.2s;
 }
 
 .cart-item:hover {
@@ -888,16 +847,18 @@ input::placeholder {
   align-items: center;
 }
 
-.cart-item-destino {
-  font-size: 21px;
-  color: var(--green);
-}
-
 .cart-price {
   font-weight: bold;
   color: #2E8B57;
   margin: 8px 0;
   font-size: 16px;
+}
+
+.cart-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
 }
 
 .remove-btn {
@@ -906,22 +867,16 @@ input::placeholder {
   font-size: 18px;
   cursor: pointer;
   color: #999;
-  transition: color 0.2s;
 }
 
 .remove-btn:hover {
   color: #e11d48;
 }
 
-.btn-remover-carrinho {
-  background: transparent;
-  color: var(--green);
-  border: 1px solid #4a8061;
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: 18px;
+#cart-total {
+  font-size: 20px;
   font-weight: bold;
-  cursor: pointer;
+  color: #111;
 }
 
 .cart-total-box {
@@ -934,101 +889,67 @@ input::placeholder {
   font-size: 18px;
 }
 
-#cart-total {
-  font-size: 20px;
-  font-weight: bold;
-  color: #111;
-}
 
 #btnConfirmarCarrinho {
   margin-top: auto;
   padding: 14px;
   border-radius: 12px;
   border: none;
-  background: linear-gradient(135deg, var(--green), #2E8B57);
-  color: var(--white);
+  background: linear-gradient(135deg, #539466, #2E8B57);
+  color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: 0.2s;
 }
 
 #btnConfirmarCarrinho:hover {
   transform: scale(1.03);
 }
 
-/* ──────────────────────────────────────────────────────────
-   TABELA DE USUÁRIOS (ADMIN)
-   ────────────────────────────────────────────────────────── */
-.table-responsive {
-  overflow-x: auto;
-  margin-top: 10px;
-}
-
-.user-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-  background: var(--white);
-}
-
-.user-table th {
-  background: #f8faf9;
-  color: var(--muted);
-  text-align: left;
-  padding: 12px;
-  border-bottom: 2px solid var(--border);
-}
-
-.user-table td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text);
-}
-
-.user-table tr:hover {
-  background-color: var(--bg);
-}
-
-.btn-user-excluir {
-  background: #9c6b6b;
-  color: var(--white);
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
+.fechar-carrinho {
+  font-size: 22px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  font-size: 18px;
   cursor: pointer;
-  font-size: 12px;
+  color: #539466;
+  border: none;
+  border-radius: 5px;
+
 }
 
-/* ──────────────────────────────────────────────────────────
-   PAINÉIS OCULTOS POR PADRÃO
-   ────────────────────────────────────────────────────────── */
-#painelAdminUsuarios,
-#painelGerenciarUsuarios {
-  display: none;
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
-/* ──────────────────────────────────────────────────────────
-   UTILITÁRIOS
-   ────────────────────────────────────────────────────────── */
-.user-nome-destaque {
-  color: var(--green);
-  font-weight: bold;
-}
 
-/* Skeleton loading */
+
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
-  100% { background-position:  400px 0; }
+  100% { background-position: 400px 0; }
 }
-
+ 
 .skeleton-line {
-  background: linear-gradient(90deg, #e8ede9 25%, #d5ded9 50%, #e8ede9 75%);
+  background: linear-gradient(
+    90deg,
+    #e8ede9 25%,
+    #d5ded9 50%,
+    #e8ede9 75%
+  );
   background-size: 800px 100%;
   animation: shimmer 1.4s infinite linear;
   display: block;
 }
-
-/* Botões desabilitados */
+ 
+/* ---- BOTÃO SALVAR DESABILITADO ---- */
 #btnSalvar:disabled,
 #btnSalvar_alteracao:disabled,
 #btnComprarReco:disabled,
@@ -1037,19 +958,15 @@ input::placeholder {
   opacity: 0.65;
   cursor: not-allowed;
 }
+#btn { display: none !important; }
 
-/* ──────────────────────────────────────────────────────────
-   ANIMAÇÕES
-   ────────────────────────────────────────────────────────── */
-@keyframes slideIn {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(0); }
-}
 
-/* ──────────────────────────────────────────────────────────
-   RESPONSIVO — TABLET (≤ 768px)
-   ────────────────────────────────────────────────────────── */
+/* media querys fodásticos*/
+
+/* (768px) */
+   
 @media (max-width: 768px) {
+  /* Topbar: Ajuste para não espremer o conteúdo */
   .topbar {
     flex-direction: column;
     padding: 20px;
@@ -1067,85 +984,339 @@ input::placeholder {
     height: 150px;
   }
 
-  .brand h1 { font-size: 28px; }
-  .brand p  { font-size: 16px; }
+  .brand h1 {
+    font-size: 28px; /* Remove o 3vw que fica minúsculo no tablet */
+  }
+
+  .brand p {
+    font-size: 16px; /* Remove o 1.5vw */
+  }
 
   .userbar {
     margin-left: 0;
     width: 100%;
     justify-content: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255,255,255,0.2);
     padding-top: 15px;
   }
 
+  /* Grid de Viagens: 2 colunas */
   .container {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Recomendações: Ajuste de títulos */
   .reco-head h2 { font-size: 24px; }
-  .reco-head p  { font-size: 16px; }
+  .reco-head p { font-size: 16px; }
 
-  .carrinho-panel { width: 350px; }
+  /* Carrinho */
+  .carrinho-panel {
+    width: 350px;
+  }
 }
 
-/* ──────────────────────────────────────────────────────────
-   RESPONSIVO — MOBILE (≤ 425px)
-   ────────────────────────────────────────────────────────── */
-@media (max-width: 425px) {
-  .brand_up   { width: 100px; height: 100px; }
-  .brand h1   { font-size: 22px; }
+/* (425px)*/
 
+@media (max-width: 425px) {
+  /* Topbar Mobile */
+  .brand_up {
+    width: 100px;
+    height: 100px;
+  }
+
+  .brand h1 { font-size: 22px; }
+
+  /* Formulário de Nova Viagem: 1 coluna */
   .form {
     grid-template-columns: 1fr;
   }
 
+  /* Botões de Ação da Lista (Carregar/Setas) */
   .actions {
     justify-content: center;
   }
-
+  
   .actions button#btn {
-    width: 100%;
+    width: 100%; /* Botão carregar ocupa tudo */
     order: -1;
   }
 
+  /* Lista de Viagens: 1 coluna (Card Cheio) */
   .container {
     grid-template-columns: 1fr;
   }
 
+  /* Cards de Viagem: Ajuste dos botões internos */
   .actions-viagens {
-    flex-direction: column;
+    flex-direction: column; /* Botão excluir fica embaixo do editar */
   }
 
-  .btn-editar,
-  .btn-excluir {
+  .btn-editar, .btn-excluir {
     width: 100%;
     padding: 12px;
   }
 
-  /* Slider de recomendações: swipe nativo no mobile */
-  .reco-nav { display: none; }
+  /* Slider de Recomendações */
+  .reco-nav {
+    display: none; /* Em celular o usuário usa o dedo (swipe) */
+  }
 
-  .reco-slider {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  .reco-slider{
+    display: flex; /* Garante que fiquem lado a lado */
+    flex-wrap: nowrap; /* Impede que quebrem linha */
+    overflow-x: auto; /* Habilita o scroll lateral */
+    -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
     gap: 15px;
     padding: 10px;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory; /* Faz os cards "travarem" na tela ao scrolar */
   }
 
   .reco-card {
-    min-width: 85vw;
+    min-width: 85vw; /* Card quase tela cheia */
     scroll-snap-align: center;
   }
 
-  .carrinho-panel { width: 100%; }
+  /* Carrinho Mobile */
+  .carrinho-panel {
+    width: 100%;
+  }
 
-  .filtros-reco input { min-width: 100%; }
+  /* Filtros Mobile */
+  .filtros-reco input {
+    min-width: 100%;
+  }
 
+  /* Modal de Compra */
   .modal-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
   }
+}
+
+.card-actions {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex;
+}
+
+.btn-mapa {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #555;
+}
+
+.btn-mapa:hover {
+  background: #f3f3f3;
+  border-color: #aaa;
+  color: #000;
+}
+
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--green);
+  color: white;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.userbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+
+#btn-carrinho {
+  position: relative; /* 👈 ESSENCIAL */
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+#btn-carrinho img {
+  width: 28px;
+}
+
+#contador-carrinho {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Container para alinhar os botões lado a lado */
+.actions-viagens {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Estilo base para ambos os botões */
+.btn-editar, .btn-excluir {
+  padding: 8px 50px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  flex: 1; /* Faz os botões terem o mesmo tamanho */
+}
+
+/* Botão Editar (Azul Travel Up) */
+.btn-editar {
+  background-color: var(--green);
+  color: white;
+}
+
+.btn-editar:hover {
+  background-color: #4a845b;
+  transform: translateY(-2px);
+}
+
+/* Botão Excluir (Vermelho/Alerta) */
+.btn-excluir {
+  background-color: #e23939;
+  color: white;
+}
+
+.btn-excluir:hover {
+  background-color: #ff0000;
+  transform: translateY(-2px);
+}
+
+/* Efeito de clique */
+.btn-editar:active, .btn-excluir:active {
+  transform: translateY(0);
+}
+
+
+
+.user-nome-destaque {
+    color: var(--green); /* Um verde harmônico com o estilo do projeto */
+    font-weight: bold; /* Opcional: deixa o nome em negrito para destacar mais */
+}
+
+.btn-remover-carrinho {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: var(--green);
+  padding: 6px 10px;
+  border-radius: 10px;
+  border-color: #4a8061;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cart-item-destino{
+  font-size: 21px;
+  color: var(--green);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--white);
+}
+
+.user-table th {
+    background: #f8faf9;
+    color: var(--muted);
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid var(--border);
+}
+
+.user-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+
+.user-table tr:hover {
+    background-color: #f3f6f4; /* Efeito hover igual ao seu bg */
+}
+
+.btn-paginacao {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-user-excluir {
+    background: #9c6b6b;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Esconde por padrão */
+#painelAdminUsuarios {
+    display: none;
+}
+
+#painelGerenciarUsuarios {
+    display: none; /* Só será exibido via JS se for admin */
+}
+
+/* Estilo para o container que segura os cards */
+#listagem {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os cards quebrem linha no desktop */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente se houver altura */
+  min-height: 150px;       /* Garante um espaço mínimo para a mensagem */
+  width: 100%;
+}
+
+/* Estilo específico para a mensagem de lista vazia */
+.msg-vazia {
+  width: 100%;             /* Ocupa a largura toda para ficar sozinho na linha */
+  text-align: center;      /* Centraliza o texto internamente */
+  color: var(--muted);     /* Usa a cor suave que você já definiu */
+  font-size: 1.1rem;
+  padding: 40px 20px;
 }
