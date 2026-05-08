@@ -6,6 +6,28 @@
   font-family: "Segoe UI", Roboto, sans-serif;
 }
 
+
+.back-btn {
+  display: block;
+  text-align: center;
+  background: #3d7a56;
+  color: white;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 4px;
+}
+
+.back-btn:hover {
+  background: #2d6a47;
+  transform: translateY(-2px);
+}
+
+
+
 /* FUNDO IGUAL AO SISTEMA */
 body {
   background-color: #cccdd0;
