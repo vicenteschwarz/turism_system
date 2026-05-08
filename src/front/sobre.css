@@ -1,0 +1,240 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: #cccdd0;
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  background-color: #3d7a56;
+  position: relative;
+  overflow: hidden;
+  padding: 52px 24px 44px;
+  text-align: center;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+}
+
+/* Círculos decorativos */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+.c1 { width: 200px; height: 200px; top: -60px; right: -60px; }
+.c2 { width: 120px; height: 120px; bottom: -40px; left: -30px; }
+.c3 { width: 80px;  height: 80px;  top: 50px; right: 60px; background: rgba(255,255,255,0.06); }
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.brand {
+  color: white;
+  font-size: 28px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.5px;
+}
+
+.brand-tag {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ── PAGE ── */
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 28px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  animation: fadeUp 0.4s ease both;
+}
+
+.card h2 {
+  font-size: 20px;
+  color: #2f3e34;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  font-size: 16px;
+  color: #2f3e34;
+  margin-bottom: 12px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+}
+
+.card strong {
+  color: #3d7a56;
+}
+
+/* Intro card destaque */
+.intro {
+  border-left: 4px solid #3d7a56;
+}
+
+/* ── TECH LIST ── */
+.tech-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tech-list li {
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge {
+  background: #edf5f0;
+  color: #3d7a56;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ── DEV CARD ── */
+.dev-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.dev-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #3d7a56;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dev-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2f3e34;
+  margin-bottom: 2px;
+}
+
+.dev-role {
+  font-size: 13px;
+  color: #3d7a56;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.dev-school {
+  font-size: 12px;
+  color: #999;
+}
+
+/* ── FEATURE GRID ── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.feature-item {
+  background: #f4faf6;
+  border: 1px solid #d8ede1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #2f3e34;
+  font-weight: 500;
+}
+
+/* ── BACK BUTTON ── */
+.back-btn {
+  display: block;
+  text-align: center;
+  background: #3d7a56;
+  color: white;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 4px;
+}
+
+.back-btn:hover {
+  background: #2d6a47;
+  transform: translateY(-2px);
+}
+
+/* ── ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.10s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.20s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+
+/* ── RESPONSIVO ── */
+@media (max-width: 480px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 40px 20px 36px;
+  }
+}

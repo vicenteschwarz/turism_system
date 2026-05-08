@@ -101,6 +101,22 @@ body {
   text-decoration: underline;
 }
 
+/* LINK SOBRE */
+#sobre-link {
+  display: block;
+  text-align: center;
+  margin-top: 18px;
+  font-size: 13px;
+  color: #5c9368;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+#sobre-link:hover {
+  text-decoration: underline;
+  color: #4b7d58;
+}
+
 /* ANIMAÇÃO */
 @keyframes fadeIn {
   from {
