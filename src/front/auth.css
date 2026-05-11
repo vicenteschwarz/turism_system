@@ -19,6 +19,9 @@
   font-weight: 600;
   transition: background 0.2s, transform 0.2s;
   margin-top: 4px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .back-btn:hover {
@@ -43,6 +46,9 @@ body {
   display: flex;
   justify-content: center;
   padding: 20px;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
 }
 
 /* CARD LOGIN */
@@ -94,7 +100,7 @@ body {
   padding: 12px;
   border-radius: 10px;
   border: none;
-  background-color: #5c9368;
+  background-color: #539466;
   color: white;
   font-weight: 600;
   font-size: 14px;
@@ -114,7 +120,7 @@ body {
   text-align: center;
   margin-top: 15px;
   font-size: 13px;
-  color: #5c9368;
+  color: #539466;
   transition: 0.2s;
 }
 
@@ -129,7 +135,7 @@ body {
   text-align: center;
   margin-top: 18px;
   font-size: 13px;
-  color: #5c9368;
+  color: #539466;
   text-decoration: none;
   transition: 0.2s;
 }

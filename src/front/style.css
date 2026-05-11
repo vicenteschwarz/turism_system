@@ -14,7 +14,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #cccdd0;
+  background: #f3f4f8;
   color: var(--text);
 }
 
@@ -111,6 +111,28 @@ input::placeholder {
   border-radius: 10px;
   border: 1px solid var(--input-border);
   background: var(--input-bg);
+}
+
+.actions #btn_load_more,
+.actions #btn_back {
+  width: 44px;
+  padding: 10px 0;
+
+}
+
+.actions #btn_load_more {
+  background: var(--green);
+  color: var(--white);
+}
+
+.actions #btn_back {
+  background: var(--green);
+  color: var(--white);
+}
+
+.actions #btn {
+  background: var(--green);
+  color: var(--white);
 }
 
 /* 

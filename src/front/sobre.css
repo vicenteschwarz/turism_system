@@ -13,7 +13,7 @@ body {
 
 /* ── HERO ── */
 .hero {
-  background-color: #3d7a56;
+  background-color: #539466;
   position: relative;
   overflow: hidden;
   padding: 52px 24px 44px;
@@ -108,7 +108,9 @@ body {
 
 /* Intro card destaque */
 .intro {
-  border-left: 4px solid #3d7a56;
+  border-left: 4px solid #539466;
+
+
 }
 
 /* ── TECH LIST ── */
@@ -129,7 +131,7 @@ body {
 
 .badge {
   background: #edf5f0;
-  color: #3d7a56;
+  color: #539466;
   font-size: 11px;
   font-weight: 700;
   padding: 3px 10px;
@@ -149,7 +151,7 @@ body {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: #3d7a56;
+  background: #539466;
   color: white;
   font-size: 22px;
   font-weight: 700;
@@ -200,7 +202,7 @@ body {
 .back-btn {
   display: block;
   text-align: center;
-  background: #3d7a56;
+  background: #539466;
   color: white;
   text-decoration: none;
   padding: 14px;
