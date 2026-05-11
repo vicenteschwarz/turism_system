@@ -40,13 +40,20 @@ body {
   justify-content: center;
 }
 
+
+.brand_up {
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+}
+
 /* ÁREA CENTRAL */
 #auth-area {
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 20px;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -69,6 +76,14 @@ body {
   text-align: center;
   margin-bottom: 25px;
   font-size: 22px;
+  color: #2f3e34;
+}
+
+#login-box h4,
+#register-box h4 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 18px;
   color: #2f3e34;
 }
 
@@ -151,6 +166,7 @@ body {
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -159,6 +175,7 @@ body {
 
 /* RESPONSIVO */
 @media (max-width: 480px) {
+
   #login-box,
   #register-box {
     padding: 30px 20px;
@@ -166,12 +183,15 @@ body {
 }
 
 @media (max-width: 425px) {
-  #login-box, #register-box {
+
+  #login-box,
+  #register-box {
     padding: 25px 15px;
     margin: 10px;
-    box-shadow: none; /* Remove sombra para parecer mais limpo no mobile */
+    box-shadow: none;
+    /* Remove sombra para parecer mais limpo no mobile */
   }
-  
+
   #auth-area h3 {
     font-size: 1.5rem;
   }
